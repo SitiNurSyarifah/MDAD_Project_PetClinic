@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AfterLogin">
+
+    <ImageView
+        android:id="@+id/imageDP"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/txtBill"
+        android:layout_width="23dp"
+        android:layout_height="21dp"
+        android:layout_marginBottom="122dp"
+        android:text="Bill"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtAppt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="73dp"
+        android:layout_marginRight="73dp"
+        android:layout_marginBottom="64dp"
+        android:text="Book Appointment"
+        app:layout_constraintBottom_toTopOf="@+id/btnPayment"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txtMedical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="31dp"
+        android:layout_marginRight="31dp"
+        android:text="Medical Records"
+        app:layout_constraintEnd_toStartOf="@+id/txtAppt"
+        app:layout_constraintTop_toTopOf="@+id/txtAppt" />
+
+    <TextView
+        android:id="@+id/txtAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:text="Add New Pet"
+        app:layout_constraintStart_toStartOf="@+id/btnBookAppt"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddPet" />
+
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="44dp"
+        android:text="View Pet"
+        app:layout_constraintBottom_toTopOf="@+id/btnMedical"
+        app:layout_constraintStart_toStartOf="@+id/btnVIewPet" />
+
+    <ImageButton
+        android:id="@+id/btnPayment"
+        android:layout_width="94dp"
+        android:layout_height="78dp"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtBill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <ImageButton
+        android:id="@+id/btnBookAppt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtAppt"
+        app:layout_constraintEnd_toEndOf="@+id/txtAppt"
+        app:layout_constraintStart_toStartOf="@+id/txtAppt"
+        app:layout_constraintTop_toTopOf="@+id/btnMedical"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <ImageButton
+        android:id="@+id/btnAddPet"
+        android:layout_width="0dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="63dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBookAppt"
+        app:layout_constraintEnd_toEndOf="@+id/txtAdd"
+        app:layout_constraintStart_toStartOf="@+id/btnBookAppt"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <ImageButton
+        android:id="@+id/btnVIewPet"
+        android:layout_width="83dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtView"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddPet"
+        app:layout_constraintTop_toTopOf="@+id/btnAddPet"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <ImageButton
+        android:id="@+id/btnMedical"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtMedical"
+        app:layout_constraintEnd_toEndOf="@+id/txtMedical"
+        app:layout_constraintStart_toStartOf="@+id/txtMedical"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/txtWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginBottom="43dp"
+        android:text="Welcome!"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddPet"
+        app:layout_constraintStart_toStartOf="@+id/btnVIewPet" />
+</androidx.constraintlayout.widget.ConstraintLayout>

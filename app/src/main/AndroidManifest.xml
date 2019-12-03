@@ -13,6 +13,10 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ViewPetParticular"></activity>
+        <activity android:name=".MedicalRecord" />
+        <activity android:name=".AddPetParticular" />
+        <activity android:name=".AfterLogin" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

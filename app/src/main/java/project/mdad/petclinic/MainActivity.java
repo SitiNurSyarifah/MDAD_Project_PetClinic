@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mPassword,mUserName;
     private Button btnSignIn;
     // url to update product
-    private static final String url_login = "http://mdad.atspace.cc/petClinic/loginJ.php";
+    private static final String url_login = "http://mdad.atspace.cc/petClinic/LoginJ.php";
 //    private static final String url_login = "http://192.168.0.111/petClinic/loginJ.php";
 
 

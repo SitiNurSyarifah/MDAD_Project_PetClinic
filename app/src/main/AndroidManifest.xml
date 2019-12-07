@@ -13,14 +13,13 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewPetParticular"></activity>
-        <activity android:name=".MedicalRecord" />
-        <activity android:name=".AddPetParticular" />
-        <activity android:name=".AfterLogin" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ViewPetParticularActivity"></activity>
+        <activity android:name=".MedicalRecordActivity" />
+        <activity android:name=".AddPetParticularActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

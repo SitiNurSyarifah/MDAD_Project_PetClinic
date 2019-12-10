@@ -22,10 +22,9 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText mPassword,mUserName;
-    private Button mbtnLogin;
-    // url to update product
-    private static final String url_login = "http://mdad.atspace.cc/petClinic/loginJ.php";
+    private EditText mPassword, mUserName;
+    private Button btnSignIn;
+    private static final String url_login = MainActivity.ipBaseAddress + "/LoginJ.php";
 //    private static final String url_login = "http://192.168.0.111/petClinic/loginJ.php";
 
 
@@ -39,49 +38,46 @@ public class LoginActivity extends AppCompatActivity {
 
         mPassword = (EditText) findViewById(R.id.password);
         mUserName = (EditText) findViewById(R.id.username);
-        mbtnLogin = (Button) findViewById(R.id.btnLogin);
+        btnSignIn = (Button) findViewById(R.id.btnSignIn);
 
         // view products click event
-        mbtnLogin.setOnClickListener(new View.OnClickListener() {
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                String pw= mPassword.getText().toString();
-                String uName= mUserName.getText().toString();
+                String pw = mPassword.getText().toString();
+                String uName = mUserName.getText().toString();
 
-                if(pw.isEmpty())
-                {
+                if (pw.isEmpty()) {
                     mPassword.setError(getString(R.string.error_field_required));
 
-                }else
-
-                if(uName.isEmpty())
-                {
+                } else if (uName.isEmpty()) {
                     mUserName.setError(getString(R.string.error_field_required));
 
-                }else
-                {
+                } else {
                     JSONObject dataJson = new JSONObject();
-                    try{
+                    try {
                         dataJson.put("username", uName);
                         dataJson.put("password", pw);
 
 
-                    }catch(JSONException e){
+                    } catch (JSONException e) {
 
                     }
 
-                    postData(url_login,dataJson,1 );
+                    postData(url_login, dataJson, 1);
 
                 }
 
             }
         });
+
+
     }
 
 
-    public void postData(String url, final JSONObject json, final int option){
+    public void postData(String url, final JSONObject json, final int option) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
@@ -89,8 +85,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
 
-                switch (option){
-                    case 1:checkResponseLogin(response); break;
+                switch (option) {
+                    case 1:
+                        checkResponseLogin(response);
+                        break;
 
                 }
 
@@ -109,20 +107,17 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue.add(json_obj_req);
     }
 
-
-    public void checkResponseLogin(JSONObject response)
-    {
-        Log.i("----Response", response+" "+url_login);
+    public void checkResponseLogin(JSONObject response) {
+        Log.i("----Response", response + " " + url_login);
         try {
-            if(response.getInt(TAG_SUCCESS)==1){
+            if (response.getInt(TAG_SUCCESS) == 1) {
 
                 finish();
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
 
 
-
-            }else{
+            } else {
                 Toast.makeText(this, "Wrong Password", Toast.LENGTH_SHORT).show();
             }
 
@@ -132,5 +127,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
 
 }

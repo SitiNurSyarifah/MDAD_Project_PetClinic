@@ -1,14 +1,14 @@
 package project.mdad.petclinic;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class MedicalRecordActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class BookAppointmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_record);
+        setContentView(R.layout.activity_book_appointment);
     }
 }

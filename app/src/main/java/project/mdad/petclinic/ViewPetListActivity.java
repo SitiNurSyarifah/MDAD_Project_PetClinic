@@ -27,7 +27,7 @@ public class ViewPetListActivity extends ListActivity {
     ArrayList<HashMap<String, String>> petsList;
 
     // url to get all products list
-    private static String url_all_pets = MainActivity.ipBaseAddress + "/get_all_pets.php";
+    private static String url_user_pets = MainActivity.ipBaseAddress + "/get_user_pets.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PETDETAILS = "petDetails";
@@ -42,12 +42,12 @@ public class ViewPetListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pet_list);
 
-         Log.i("------url_all_products",url_all_pets);
+         Log.i("------url_user_pets", url_user_pets);
         // Hashmap for ListView
         petsList = new ArrayList<HashMap<String, String>>();
 
         // Loading products in Background Thread
-        postData(url_all_pets, null);
+        postData(url_user_pets, null);
 
         // Get listview from list_pets.xml
         ListView lv = getListView();

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="74dp"
-        android:layout_height="96dp"
+        android:layout_width="76dp"
+        android:layout_height="93dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginBottom="47dp"
@@ -23,8 +23,8 @@
         android:id="@+id/txtBill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginBottom="546dp"
         android:text="Outstanding Bill"
         android:textSize="24sp"

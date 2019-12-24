@@ -1,11 +1,16 @@
 package project.mdad.petclinic;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,7 +47,7 @@ public class ViewPetListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pet_list);
 
-         Log.i("------url_user_pets", url_user_pets);
+        Log.i("------url_user_pets", url_user_pets);
         // Hashmap for ListView
         petsList = new ArrayList<HashMap<String, String>>();
 
@@ -52,9 +57,48 @@ public class ViewPetListActivity extends ListActivity {
         // Get listview from list_pets.xml
         ListView lv = getListView();
 
+        // on seleting single product
+        // launching View pet particluars Screen
+        lv.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // getting values from selected ListItem
+                String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
+
+                // Starting new intent
+                Intent in = new Intent(getApplicationContext(), ViewPetDetailsActivity.class);
+                // sending pid to next activity
+                in.putExtra(TAG_PID, pid);
+
+                // starting new activity and expecting some response back
+                startActivityForResult(in, 100);
+            }
+        });
+
     }
 
-    public void postData(String url, final JSONObject json){
+    // Response from View pet particluars Activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // if result code 100 means Continue
+        //https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+
+
+        if (resultCode == 100) {
+            // if result code 100 is received
+            // means user edited/deleted product
+            // reload this screen again
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        }
+
+    }
+
+    public void postData(String url, final JSONObject json) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
@@ -87,9 +131,9 @@ public class ViewPetListActivity extends ListActivity {
         requestQueue.add(json_obj_req);
     }
 
-    private void checkResponse(JSONObject response, JSONObject creds){
+    private void checkResponse(JSONObject response, JSONObject creds) {
         try {
-            if(response.getInt(TAG_SUCCESS)==1){
+            if (response.getInt(TAG_SUCCESS) == 1) {
 
                 // products found
                 // Getting Array of Products
@@ -119,14 +163,13 @@ public class ViewPetListActivity extends ListActivity {
                  * */
                 ListAdapter adapter = new SimpleAdapter(
                         ViewPetListActivity.this, petsList,
-                        R.layout.list_pets, new String[] { TAG_PID,
+                        R.layout.list_pets, new String[]{TAG_PID,
                         TAG_PETNAME},
-                        new int[] { R.id.pid, R.id.name });
+                        new int[]{R.id.pid, R.id.name});
                 // updating listview
                 setListAdapter(adapter);
 
-            }
-            else{
+            } else {
 
             }
 

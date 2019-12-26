@@ -1,16 +1,15 @@
 package project.mdad.petclinic;
 
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,60 +25,63 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class ViewPetListActivity extends ListActivity {
 
 
-    ArrayList<HashMap<String, String>> petsList;
+    ArrayList<HashMap<String, String>> petList;
 
     // url to get all products list
-    private static String url_user_pets = MainActivity.ipBaseAddress + "/get_user_pets.php";
+    private static String url_pet_list = MainActivity.ipBaseAddress+"/get_user_pets.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PETDETAILS = "petDetails";
+    private static final String TAG_PETDETAILS = "petdetails";
     private static final String TAG_PID = "pid";
-    private static final String TAG_PETNAME = "petName";
+    private static final String TAG_NAME = "petName";
 
     // products JSONArray
-    JSONArray petDetails = null;
+    JSONArray petdetails = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pet_list);
 
-        Log.i("------url_user_pets", url_user_pets);
+
+        //   Log.i("------url_all_products",url_all_products);
         // Hashmap for ListView
-        petsList = new ArrayList<HashMap<String, String>>();
+        petList = new ArrayList<HashMap<String, String>>();
 
         // Loading products in Background Thread
-        postData(url_user_pets, null);
+        postData(url_pet_list,null );
 
-        // Get listview from list_pets.xml
+
+
+
+        // Get listview from list_items.xml
         ListView lv = getListView();
 
         // on seleting single product
-        // launching View pet particluars Screen
+        // launching Edit Product Screen
         lv.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // getting values from selected ListItem
-                String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
 
                 // Starting new intent
-                Intent in = new Intent(getApplicationContext(), ViewPetDetailsActivity.class);
+
                 // sending pid to next activity
-                in.putExtra(TAG_PID, pid);
 
                 // starting new activity and expecting some response back
-                startActivityForResult(in, 100);
+
             }
         });
 
     }
 
-    // Response from View pet particluars Activity
+    // Response from Edit Product Activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -98,7 +100,8 @@ public class ViewPetListActivity extends ListActivity {
 
     }
 
-    public void postData(String url, final JSONObject json) {
+
+    public void postData(String url, final JSONObject json){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
@@ -131,45 +134,46 @@ public class ViewPetListActivity extends ListActivity {
         requestQueue.add(json_obj_req);
     }
 
-    private void checkResponse(JSONObject response, JSONObject creds) {
+    private void checkResponse(JSONObject response, JSONObject creds){
         try {
-            if (response.getInt(TAG_SUCCESS) == 1) {
+            if(response.getInt(TAG_SUCCESS)==1){
 
                 // products found
                 // Getting Array of Products
-                petDetails = response.getJSONArray(TAG_PETDETAILS);
+                petdetails = response.getJSONArray(TAG_PETDETAILS);
 
                 // looping through All Products
-                for (int i = 0; i < petDetails.length(); i++) {
-                    JSONObject c = petDetails.getJSONObject(i);
+                for (int i = 0; i < petdetails.length(); i++) {
+                    JSONObject c = petdetails.getJSONObject(i);
 
                     // Storing each json item in variable
                     String id = c.getString(TAG_PID);
-                    String name = c.getString(TAG_PETNAME);
+                    String petName = c.getString(TAG_NAME);
 
                     // creating new HashMap
                     HashMap<String, String> map = new HashMap<String, String>();
 
                     // adding each child node to HashMap key => value
                     map.put(TAG_PID, id);
-                    map.put(TAG_PETNAME, name);
+                    map.put(TAG_NAME, petName);
 
                     // adding HashList to ArrayList
-                    petsList.add(map);
+                    petList.add(map);
                 }
 
                 /**
                  * Updating parsed JSON data into ListView
                  * */
                 ListAdapter adapter = new SimpleAdapter(
-                        ViewPetListActivity.this, petsList,
-                        R.layout.list_pets, new String[]{TAG_PID,
-                        TAG_PETNAME},
-                        new int[]{R.id.pid, R.id.name});
+                        ViewPetListActivity.this, petList,
+                        R.layout.activity_view_pet_list, new String[] { TAG_PID,
+                        TAG_NAME},
+                        new int[] { R.id.pid, R.id.etPetName });
                 // updating listview
                 setListAdapter(adapter);
 
-            } else {
+            }
+            else{
 
             }
 
@@ -180,5 +184,4 @@ public class ViewPetListActivity extends ListActivity {
 
     }
 
-
-}
+} //end of AllProductsActivity class

@@ -1,6 +1,7 @@
 package project.mdad.petclinic;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,21 +26,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class MedicalRecordsActivity extends ListActivity {
+public class MedicalListActivity extends ListActivity {
 
 
     ArrayList<HashMap<String, String>> medicalList;
-
+    private ProgressDialog pDialog;
     // url to get all products list
     private static String url_medical_list = MainActivity.ipBaseAddress+"/get_medical_record.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PRODUCTS = "products";
+    private static final String TAG_MEDRECORDS = "medrecords";
     private static final String TAG_PID = "pid";
     private static final String TAG_VACCINATION = "vaccination";
-    private static final String TAG_DISEASE = "disease";
-    private static final String TAG_CHECKUPS = "checkups";
-    private static final String TAG_CIRCUMCISION = "circumcision";
 
     // products JSONArray
     JSONArray medrecords = null;
@@ -47,12 +45,19 @@ public class MedicalRecordsActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medical_records);
+        setContentView(R.layout.activity_medical_list);
 
 
         //   Log.i("------url_all_products",url_all_products);
         // Hashmap for ListView
         medicalList = new ArrayList<HashMap<String, String>>();
+        
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading medical list ...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(true);
+        pDialog.show();
+
 
         // Loading products in Background Thread
         postData(url_medical_list,null );
@@ -61,11 +66,11 @@ public class MedicalRecordsActivity extends ListActivity {
 
 
         // Get listview from list_items.xml
-        ListView medicalList = getListView();
+        ListView lv = getListView();
 
         // on seleting single product
         // launching Edit Product Screen
-        medicalList.setOnItemClickListener(new OnItemClickListener() {
+        lv.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -142,7 +147,7 @@ public class MedicalRecordsActivity extends ListActivity {
 
                 // products found
                 // Getting Array of Products
-                medrecords = response.getJSONArray(TAG_PRODUCTS);
+                medrecords = response.getJSONArray(TAG_MEDRECORDS);
 
                 // looping through All Products
                 for (int i = 0; i < medrecords.length(); i++) {
@@ -151,9 +156,6 @@ public class MedicalRecordsActivity extends ListActivity {
                     // Storing each json item in variable
                     String id = c.getString(TAG_PID);
                     String vaccination = c.getString(TAG_VACCINATION);
-                    String disease = c.getString(TAG_DISEASE);
-                    String checkups = c.getString(TAG_CHECKUPS);
-                    String circumcision = c.getString(TAG_CIRCUMCISION);
 
                     // creating new HashMap
                     HashMap<String, String> map = new HashMap<String, String>();
@@ -161,9 +163,7 @@ public class MedicalRecordsActivity extends ListActivity {
                     // adding each child node to HashMap key => value
                     map.put(TAG_PID, id);
                     map.put(TAG_VACCINATION, vaccination);
-                    map.put(TAG_DISEASE, disease);
-                    map.put(TAG_CHECKUPS, checkups);
-                    map.put(TAG_CIRCUMCISION, circumcision);
+
                     // adding HashList to ArrayList
                     medicalList.add(map);
                 }
@@ -172,11 +172,10 @@ public class MedicalRecordsActivity extends ListActivity {
                  * Updating parsed JSON data into ListView
                  * */
                 ListAdapter adapter = new SimpleAdapter(
-                        MedicalRecordsActivity.this,medicalList,
-                        R.layout.activity_medical_records, new String[] { TAG_PID,
-                        TAG_DISEASE, TAG_CHECKUPS, TAG_CIRCUMCISION},
-                new int[]{R.id.pid, R.id.name});
-
+                        MedicalListActivity.this, medicalList,
+                        R.layout.activity_medical_list, new String[] { TAG_PID,
+                        TAG_VACCINATION},
+                        new int[] { R.id.pid, R.id.vaccination });
                 // updating listview
                 setListAdapter(adapter);
 
@@ -189,7 +188,7 @@ public class MedicalRecordsActivity extends ListActivity {
             e.printStackTrace();
 
         }
-
+        pDialog.dismiss();
     }
 
 } //end of AllProductsActivity class

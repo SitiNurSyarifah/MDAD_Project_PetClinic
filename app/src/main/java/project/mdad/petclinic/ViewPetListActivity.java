@@ -2,6 +2,7 @@ package project.mdad.petclinic;
 
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +31,7 @@ public class ViewPetListActivity extends ListActivity {
 
 
     ArrayList<HashMap<String, String>> petList;
-
+    private ProgressDialog pDialog;
     // url to get all products list
     private static String url_pet_list = MainActivity.ipBaseAddress+"/get_user_pets.php";
     // JSON Node names
@@ -51,6 +52,12 @@ public class ViewPetListActivity extends ListActivity {
         //   Log.i("------url_all_products",url_all_products);
         // Hashmap for ListView
         petList = new ArrayList<HashMap<String, String>>();
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Loading pet list ...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(true);
+        pDialog.show();
+
 
         // Loading products in Background Thread
         postData(url_pet_list,null );
@@ -181,7 +188,7 @@ public class ViewPetListActivity extends ListActivity {
             e.printStackTrace();
 
         }
-
+        pDialog.dismiss();
     }
 
 } //end of AllProductsActivity class

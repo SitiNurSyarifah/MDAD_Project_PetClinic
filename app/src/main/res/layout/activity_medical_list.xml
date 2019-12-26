@@ -37,7 +37,7 @@
     <TextView
         android:id="@+id/vaccination"
         android:layout_width="match_parent"
-        android:layout_height="294dp"
+        android:layout_height="338dp"
         android:paddingLeft="6dip"
         android:paddingTop="6dip"
         android:textSize="17dip"

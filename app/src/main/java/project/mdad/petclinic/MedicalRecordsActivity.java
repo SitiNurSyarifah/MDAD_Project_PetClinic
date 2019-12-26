@@ -174,7 +174,8 @@ public class MedicalRecordsActivity extends ListActivity {
                 ListAdapter adapter = new SimpleAdapter(
                         MedicalRecordsActivity.this,medicalList,
                         R.layout.activity_medical_records, new String[] { TAG_PID,
-                        TAG_DISEASE, TAG_CHECKUPS, TAG_CIRCUMCISION)};
+                        TAG_DISEASE, TAG_CHECKUPS, TAG_CIRCUMCISION},
+                new int[]{R.id.pid, R.id.name});
 
                 // updating listview
                 setListAdapter(adapter);

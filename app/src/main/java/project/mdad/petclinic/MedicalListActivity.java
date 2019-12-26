@@ -35,7 +35,7 @@ public class MedicalListActivity extends ListActivity {
     private static String url_medical_list = MainActivity.ipBaseAddress+"/get_medical_record.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_MEDRECORDS = "medrecords";
+    private static final String TAG_RECORDS = "medrecords";
     private static final String TAG_PID = "pid";
     private static final String TAG_VACCINATION = "vaccination";
 
@@ -147,7 +147,7 @@ public class MedicalListActivity extends ListActivity {
 
                 // products found
                 // Getting Array of Products
-                medrecords = response.getJSONArray(TAG_MEDRECORDS);
+                medrecords = response.getJSONArray(TAG_RECORDS);
 
                 // looping through All Products
                 for (int i = 0; i < medrecords.length(); i++) {

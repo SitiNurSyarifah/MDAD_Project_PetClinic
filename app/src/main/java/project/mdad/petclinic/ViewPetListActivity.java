@@ -36,7 +36,7 @@ public class ViewPetListActivity extends ListActivity {
     private static String url_pet_list = MainActivity.ipBaseAddress+"/get_user_pets.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PETDETAILS = "petdetails";
+    private static final String TAG_DETAILS = "petdetails";
     private static final String TAG_PID = "pid";
     private static final String TAG_NAME = "petName";
 
@@ -147,7 +147,7 @@ public class ViewPetListActivity extends ListActivity {
 
                 // products found
                 // Getting Array of Products
-                petdetails = response.getJSONArray(TAG_PETDETAILS);
+                petdetails = response.getJSONArray(TAG_DETAILS);
 
                 // looping through All Products
                 for (int i = 0; i < petdetails.length(); i++) {

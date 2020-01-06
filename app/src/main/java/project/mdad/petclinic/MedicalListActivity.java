@@ -1,7 +1,6 @@
 package project.mdad.petclinic;
 
 import android.app.ListActivity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,12 +30,12 @@ public class MedicalListActivity extends ListActivity {
 
 
     ArrayList<HashMap<String, String>> medicalList;
-    private ProgressDialog pDialog;
+  // private ProgressDialog pDialog;
     // url to get all products list
-    private static String url_medical_list = MainActivity.ipBaseAddress+"/get_medical_record.php";
+    private static String url_medical_list = project.mdad.petclinic.MainActivity.ipBaseAddress+"/get_medical_record.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_RECORDS = "medrecords";
+    private static final String TAG_RECORDS = "records";
     private static final String TAG_PID = "pid";
     private static final String TAG_VACCINATION = "vaccination";
 
@@ -52,11 +52,11 @@ public class MedicalListActivity extends ListActivity {
         // Hashmap for ListView
         medicalList = new ArrayList<HashMap<String, String>>();
         
-        pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading medical list ...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(true);
-        pDialog.show();
+        //pDialog = new ProgressDialog(this);
+        //pDialog.setMessage("Loading medical list ...");
+        //pDialog.setIndeterminate(false);
+        //pDialog.setCancelable(true);
+       // pDialog.show();
 
 
         // Loading products in Background Thread
@@ -76,12 +76,13 @@ public class MedicalListActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // getting values from selected ListItem
-
+                String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
                 // Starting new intent
-
+                Intent in = new Intent(getApplicationContext(), ViewPetListActivity.class);
                 // sending pid to next activity
-
+                in.putExtra(TAG_PID, pid);
                 // starting new activity and expecting some response back
+                startActivityForResult(in, 100);
 
             }
         });
@@ -173,9 +174,9 @@ public class MedicalListActivity extends ListActivity {
                  * */
                 ListAdapter adapter = new SimpleAdapter(
                         MedicalListActivity.this, medicalList,
-                        R.layout.activity_medical_list, new String[] { TAG_PID,
+                        R.layout.list_pets, new String[] { TAG_PID,
                         TAG_VACCINATION},
-                        new int[] { R.id.pid, R.id.vaccination });
+                        new int[] { R.id.pid, R.id.vaccination});
                 // updating listview
                 setListAdapter(adapter);
 
@@ -188,7 +189,7 @@ public class MedicalListActivity extends ListActivity {
             e.printStackTrace();
 
         }
-        pDialog.dismiss();
+        //pDialog.dismiss();
     }
 
 } //end of AllProductsActivity class

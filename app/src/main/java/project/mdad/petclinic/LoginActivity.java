@@ -75,8 +75,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-
-
     public void postData(String url, final JSONObject json, final int option) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest json_obj_req = new JsonObjectRequest(

@@ -1,48 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <!-- Product id (pid) - will be HIDDEN - used to pass to other activity -->
-    <ImageView
-        android:id="@+id/imageDP"
-        app:layout_constraintBottom_toTopOf="@+id/txtMedical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round"
-        android:layout_width="97dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginBottom="75dp" />
-
-    <TextView
-        android:id="@+id/txtMedical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="56dp"
-        android:text="Medical Records:" />
-
-    <TextView
-        android:id="@+id/pid"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
-
-    <!-- Name Label -->
-    <TextView
-        android:id="@+id/vaccination"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="294dp"
-        android:paddingLeft="6dip"
-        android:paddingTop="6dip"
-        android:textSize="17dip"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/txtRecord"
+            android:layout_width="134dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="98dp"
+            android:layout_marginBottom="36dp"
+            android:autoText="false"
+            android:text="Medical Record"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@android:id/list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ListView
+            android:id="@+id/listView4"
+            android:layout_width="396dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRecord" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

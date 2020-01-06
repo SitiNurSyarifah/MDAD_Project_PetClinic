@@ -1,11 +1,11 @@
 package project.mdad.petclinic;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Launching medical records Activity
-                Intent i = new Intent(getApplicationContext(), MedicalRecordsActivity.class);
+                Intent i = new Intent(getApplicationContext(), MedicalListActivity.class);
                 startActivity(i);
             }
         });

@@ -3,8 +3,10 @@ package project.mdad.petclinic;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,7 +33,7 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     EditText txtBreed;
     EditText txtWeight;
 
-    Button btnEdit;
+    Button btnUpdate,btnViewMedRec;
     // Response
     String responseServer;
 
@@ -68,16 +70,15 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pet_details);
+        btnViewMedRec = (Button) findViewById(R.id.btnView);
 
         Log.i("url_product_details", url_pet_details);
         // getting product details from intent
         Intent i = getIntent();
-
         // getting product id (pid) from intent
         pid = i.getStringExtra(TAG_PID);
 
         // Getting complete product details in background thread
-
         JSONObject dataJson = new JSONObject();
         try{
             dataJson.put("pid", pid);
@@ -88,6 +89,17 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
         }
 
         postData(url_pet_details,dataJson,1 );
+
+        // view pet click event
+        btnViewMedRec.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // Launching view pet list Activity
+                Intent i = new Intent(getApplicationContext(), MedicalRecordsActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 

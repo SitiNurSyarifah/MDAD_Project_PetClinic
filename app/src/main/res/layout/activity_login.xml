@@ -45,5 +45,7 @@
         android:background="#f05924"
         android:text="@string/action_sign_in"
         android:textColor="@android:color/white" />
- \
+
+
+
 </LinearLayout>

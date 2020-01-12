@@ -68,7 +68,7 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pet_details);
-        btnViewMedRec = (Button) findViewById(R.id.btnView);
+        btnViewMedRec = (Button) findViewById(R.id.btnViewMedRec);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
         btnDelete = (Button) findViewById(R.id.btnDelete);
         Log.i("url_product_details", url_pet_details);

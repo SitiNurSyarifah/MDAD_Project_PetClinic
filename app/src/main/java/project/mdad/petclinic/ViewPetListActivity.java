@@ -47,8 +47,6 @@ public class ViewPetListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pet_list);
 
-
-
         petList = new ArrayList<HashMap<String, String>>();
 
         // Loading products in Background Thread

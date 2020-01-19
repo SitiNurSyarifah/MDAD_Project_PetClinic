@@ -41,8 +41,8 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
 
     // single product url
     private static final String url_pet_details = MainActivity.ipBaseAddress + "/get_pet_details.php";
-    private static final String url_pet_update = MainActivity.ipBaseAddress + "/update_pets.php";
-    private static final String url_pet_delete = MainActivity.ipBaseAddress + "/delete_pets.php";
+    private static final String url_pet_update = MainActivity.ipBaseAddress + "/update_pet.php";
+    private static final String url_pet_delete = MainActivity.ipBaseAddress + "/delete_pet.php";
 
 
     // JSON Node names
@@ -51,7 +51,6 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     private static final String TAG_PID = "pid";
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_GENDER = "gender";
-    //    private static final String TAG_DOB = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     private static final String TAG_DOB = "dob";
     private static final String TAG_BREED = "breed";
     private static final String TAG_WEIGHT = "weight";

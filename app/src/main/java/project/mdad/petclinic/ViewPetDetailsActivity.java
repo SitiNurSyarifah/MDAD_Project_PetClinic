@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,8 +21,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ViewPetDetailsActivity extends AppCompatActivity {
 
@@ -33,7 +30,7 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     EditText txtBreed;
     EditText txtWeight;
 
-    Button btnUpdate,btnViewMedRec;
+    Button btnUpdate, btnViewMedRec, btnDelete;
     // Response
     String responseServer;
 
@@ -44,7 +41,8 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
 
     // single product url
     private static final String url_pet_details = MainActivity.ipBaseAddress + "/get_pet_details.php";
-
+    private static final String url_pet_update = MainActivity.ipBaseAddress + "/update_pet.php";
+    private static final String url_pet_delete = MainActivity.ipBaseAddress + "/delete_pet.php";
 
 
     // JSON Node names
@@ -53,8 +51,7 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     private static final String TAG_PID = "pid";
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_GENDER = "gender";
-//    private static final String TAG_DOB = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        private static final String TAG_DOB = "dob";
+    private static final String TAG_DOB = "dob";
     private static final String TAG_BREED = "breed";
     private static final String TAG_WEIGHT = "weight";
 
@@ -70,8 +67,9 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pet_details);
-        btnViewMedRec = (Button) findViewById(R.id.btnView);
-
+        btnViewMedRec = (Button) findViewById(R.id.btnViewMedRec);
+        btnUpdate = (Button) findViewById(R.id.btnUpdate);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
         Log.i("url_product_details", url_pet_details);
         // getting product details from intent
         Intent i = getIntent();
@@ -80,15 +78,15 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
 
         // Getting complete product details in background thread
         JSONObject dataJson = new JSONObject();
-        try{
+        try {
             dataJson.put("pid", pid);
             //     dataJson.put("password", "def");
 
-        }catch(JSONException e){
+        } catch (JSONException e) {
 
         }
 
-        postData(url_pet_details,dataJson,1 );
+        postData(url_pet_details, dataJson, 1);
 
         // view pet click event
         btnViewMedRec.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +94,57 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Launching view pet list Activity
-                Intent i = new Intent(getApplicationContext(), MedicalRecordsActivity.class);
+                Intent i = new Intent(getApplicationContext(), MedicalListActivity.class);
                 startActivity(i);
+            }
+        });
+
+        // save button click event
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                // getting updated data from EditTexts
+                String petName = txtPetName.getText().toString();
+                String gender = txtGender.getText().toString();
+                String dob = txtDOB.getText().toString();
+                String breed = txtBreed.getText().toString();
+                String weight = txtWeight.getText().toString();
+
+
+                // starting background task to update product
+                JSONObject dataJson = new JSONObject();
+                try {
+                    dataJson.put("pid", pid);
+                    dataJson.put(TAG_PETNAME, petName);
+                    dataJson.put(TAG_GENDER, gender);
+                    dataJson.put(TAG_DOB, dob);
+                    dataJson.put(TAG_BREED, breed);
+                    dataJson.put(TAG_WEIGHT, weight);
+
+                } catch (JSONException e) {
+
+                }
+                postData(url_pet_update, dataJson, 2);
+            }
+        });
+
+        // Delete button click event
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // deleting product in background thread
+
+                JSONObject dataJson = new JSONObject();
+                try {
+                    dataJson.put("pid", pid);
+                } catch (JSONException e) {
+
+                }
+                postData(url_pet_delete, dataJson, 2);
+
             }
         });
 
@@ -112,7 +159,9 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
 
 
                 switch (option){
-                    case 1:checkResponseEditProduct(response); break;
+                    case 1:checkResponseEditPet(response); break;
+                    case 2:checkResponseSave_delete_Pet(response); break;
+
                 }
 
             }
@@ -130,19 +179,42 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
         requestQueue.add(json_obj_req);
     }
 
-    public void checkResponseEditProduct(JSONObject response)
+    public void checkResponseSave_delete_Pet(JSONObject response)
     {
+
         try {
-            if(response.getInt(TAG_SUCCESS)==1){
+            if(response.getInt("success")==1){
+                // successfully updated
+                Intent i = getIntent();
+                // send result code 100 to notify about product update
+                setResult(100, i);
+                finish();
+
+            }else{
+                // product with pid not found
+            }
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+
+        }
+
+
+    }
+
+    public void checkResponseEditPet(JSONObject response) {
+        try {
+            if (response.getInt(TAG_SUCCESS) == 1) {
                 // successfully received product details
                 JSONArray petObj = response.getJSONArray(TAG_PETDETAILS); // JSON Array
                 // get first product object from JSON Array
                 JSONObject petDetail = petObj.getJSONObject(0);
-                petPetName=petDetail.getString(TAG_PETNAME);
-                petGender=petDetail.getString(TAG_GENDER);
-                petDOB=petDetail.getString(TAG_DOB);
-                petBreed=petDetail.getString(TAG_BREED);
-                petWeight=petDetail.getString(TAG_WEIGHT);
+                petPetName = petDetail.getString(TAG_PETNAME);
+                petGender = petDetail.getString(TAG_GENDER);
+                petDOB = petDetail.getString(TAG_DOB);
+                petBreed = petDetail.getString(TAG_BREED);
+                petWeight = petDetail.getString(TAG_WEIGHT);
 
 
 //                Log.i("---Prod details",prodName+"  "+prodPrice+"  "+prodDesc);
@@ -160,7 +232,7 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
                 txtBreed.setText(petBreed);
                 txtWeight.setText(petWeight);
 
-            }else{
+            } else {
                 // product with pid not found
             }
 

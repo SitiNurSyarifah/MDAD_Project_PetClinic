@@ -14,7 +14,7 @@
 
     <!-- Name Label -->
     <TextView
-        android:id="@+id/vaccination"
+        android:id="@+id/petName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingTop="6dip"

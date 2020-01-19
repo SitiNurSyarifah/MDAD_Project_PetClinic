@@ -1,6 +1,5 @@
 package project.mdad.petclinic;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,34 +19,35 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+
 
 public class AddPetActivity extends AppCompatActivity {
 
-    // Progress Dialog
-    private ProgressDialog pDialog;
 
-    EditText editName;
-    EditText editGender;
-    EditText editDOB;
-    EditText editBreed;
-    EditText editWeight;
+    EditText inputPetName;
+    EditText inputGender;
+    EditText inputDOB;
+    EditText inputBreed;
+    EditText inputWeight;
 
-    String petName,gender,date_of_birth,breed,weight;
+    String petName, gender, breed, dob, weight;
 
 
-    public static String ipBaseAddress = "http://mdadproject.atspace.cc/petClinic";
     // url to create new product
-    //private static final String url_login = "http://172.30.30.97/petclinic/LoginJ.php";
-    private static String url_add_pet = AddPetActivity.ipBaseAddress+"/create_productJson.php";
+
+    private static String url_create_pet = MainActivity.ipBaseAddress + "/create_pet.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PET = "pet";
+    private static final String TAG_PETDETAILS = "petDetails";
+    private static final String TAG_PID = "pid";
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_GENDER = "gender";
-    private static final String TAG_DATE_OF_BIRTH = "date_of_birth";
+    private static final String TAG_DOB = "dob";
     private static final String TAG_BREED = "breed";
     private static final String TAG_WEIGHT = "weight";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,62 +55,53 @@ public class AddPetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_pet);
 
 
-        Log.i("Ip address CREATE ", url_add_pet);
+        Log.i("Ip address CREATE ", url_create_pet);
         // Edit Text
-        editName = (EditText) findViewById(R.id.editName);
-        editGender = (EditText) findViewById(R.id.editGender);
-        editDOB = (EditText) findViewById(R.id.editDOB);
-        editBreed = (EditText) findViewById(R.id.editBreed);
-        editWeight = (EditText) findViewById(R.id.editWeight);
+        inputPetName = (EditText) findViewById(R.id.etPetName);
+        inputGender = (EditText) findViewById(R.id.etGender);
+        inputDOB = (EditText) findViewById(R.id.etDOB);
+        inputBreed = (EditText) findViewById(R.id.etBreed);
+        inputWeight = (EditText) findViewById(R.id.etWeight);
 
         // Create button
-        Button btnCreateProduct = (Button) findViewById(R.id.btnAdd);
+        Button btnAddPet = (Button) findViewById(R.id.btnAddPet);
+
 
         // button click event
-        btnCreateProduct.setOnClickListener(new View.OnClickListener() {
+        btnAddPet.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
 
-                petName = editName.getText().toString();
-                gender = editGender.getText().toString();
-                date_of_birth = editDOB.getText().toString();
-                breed = editBreed.getText().toString();
-                weight = editWeight.getText().toString();
-
-
-                pDialog = new ProgressDialog(AddPetActivity.this);
-                pDialog.setMessage("Adding pet ...");
-                pDialog.setIndeterminate(false);
-                pDialog.setCancelable(true);
-                pDialog.show();
+                petName = inputPetName.getText().toString();
+                gender = inputGender.getText().toString();
+                dob = inputDOB.getText().toString();
+                breed = inputBreed.getText().toString();
+                weight = inputWeight.getText().toString();
 
 
                 JSONObject dataJson = new JSONObject();
-                try{
+                try {
                     dataJson.put(TAG_PETNAME, petName);
                     dataJson.put(TAG_GENDER, gender);
-                    dataJson.put(TAG_DATE_OF_BIRTH, date_of_birth);
+                    dataJson.put(TAG_DOB, dob);
                     dataJson.put(TAG_BREED, breed);
                     dataJson.put(TAG_WEIGHT, weight);
 
 
-                }catch(JSONException e){
+                } catch (JSONException e) {
 
                 }
 
-                postData(url_add_pet,dataJson,1 );
+                postData(url_create_pet, dataJson, 1);
 
-
-                // creating new product in background thread
-                // new CreateNewProduct().execute();
             }
         });
+
     }
 
-
-    public void postData(String url, final JSONObject json, final int option){
+    public void postData(String url, final JSONObject json, final int option) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
@@ -118,8 +109,10 @@ public class AddPetActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
 
-                switch (option){
-                    case 1:checkResponseCreate_Product(response); break;
+                switch (option) {
+                    case 1:
+                        checkResponseCreate_Product(response);
+                        break;
 
                 }
 
@@ -139,20 +132,16 @@ public class AddPetActivity extends AppCompatActivity {
     }
 
 
-    public void checkResponseCreate_Product(JSONObject response)
-    {
-        Log.i("----Response", response+" ");
+    public void checkResponseCreate_Product(JSONObject response) {
+        Log.i("----Response", response + " ");
         try {
-            if(response.getInt(TAG_SUCCESS)==1){
+            if (response.getInt(TAG_SUCCESS) == 1) {
 
                 finish();
                 Intent i = new Intent(this, ViewPetListActivity.class);
                 startActivity(i);
 
-                // dismiss the dialog once product uupdated
-                pDialog.dismiss();
-
-            }else{
+            } else {
                 // product with pid not found
             }
 
@@ -162,7 +151,5 @@ public class AddPetActivity extends AppCompatActivity {
         }
 
     }
-
-
 
 }

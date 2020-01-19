@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,38 +32,25 @@ public class ViewPetListActivity extends ListActivity {
 
 
     ArrayList<HashMap<String, String>> petList;
-    private ProgressDialog pDialog;
-    // url to get all products list
     private static String url_pet_list = MainActivity.ipBaseAddress+"/get_user_pets.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_DETAILS = "petdetails";
+    private static final String TAG_PETDETAILS = "petDetails";
     private static final String TAG_PID = "pid";
     private static final String TAG_NAME = "petName";
 
     // products JSONArray
-    JSONArray petdetails = null;
+    JSONArray petDetails = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pet_list);
 
-
-        //   Log.i("------url_all_products",url_all_products);
-        // Hashmap for ListView
         petList = new ArrayList<HashMap<String, String>>();
-        pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Loading pet list ...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(true);
-        pDialog.show();
-
 
         // Loading products in Background Thread
         postData(url_pet_list,null );
-
-
 
 
         // Get listview from list_items.xml
@@ -76,12 +64,14 @@ public class ViewPetListActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // getting values from selected ListItem
-
+                String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
                 // Starting new intent
-
+                Intent in = new Intent(getApplicationContext(), ViewPetDetailsActivity.class);
                 // sending pid to next activity
-
+                in.putExtra(TAG_PID, pid);
                 // starting new activity and expecting some response back
+                startActivityForResult(in, 100);
+
 
             }
         });
@@ -147,11 +137,11 @@ public class ViewPetListActivity extends ListActivity {
 
                 // products found
                 // Getting Array of Products
-                petdetails = response.getJSONArray(TAG_DETAILS);
+                petDetails = response.getJSONArray(TAG_PETDETAILS);
 
                 // looping through All Products
-                for (int i = 0; i < petdetails.length(); i++) {
-                    JSONObject c = petdetails.getJSONObject(i);
+                for (int i = 0; i < petDetails.length(); i++) {
+                    JSONObject c = petDetails.getJSONObject(i);
 
                     // Storing each json item in variable
                     String id = c.getString(TAG_PID);
@@ -173,9 +163,9 @@ public class ViewPetListActivity extends ListActivity {
                  * */
                 ListAdapter adapter = new SimpleAdapter(
                         ViewPetListActivity.this, petList,
-                        R.layout.activity_view_pet_list, new String[] { TAG_PID,
+                        R.layout.list_pets, new String[] { TAG_PID,
                         TAG_NAME},
-                        new int[] { R.id.pid, R.id.etPetName });
+                        new int[] { R.id.pid, R.id.petName });
                 // updating listview
                 setListAdapter(adapter);
 
@@ -188,7 +178,6 @@ public class ViewPetListActivity extends ListActivity {
             e.printStackTrace();
 
         }
-        pDialog.dismiss();
     }
 
 } //end of AllProductsActivity class

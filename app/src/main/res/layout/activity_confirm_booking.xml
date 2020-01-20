@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmBookingActivity">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="77dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintBottom_toTopOf="@+id/slot1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/slot1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginBottom="29dp"
+        android:text="9:00am - 10:00am"
+        app:layout_constraintBottom_toTopOf="@+id/slot2"
+        app:layout_constraintEnd_toStartOf="@+id/slot4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <Button
+        android:id="@+id/slot2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginBottom="39dp"
+        android:text="10:00am - 11:00am"
+        app:layout_constraintBottom_toTopOf="@+id/slot3"
+        app:layout_constraintEnd_toStartOf="@+id/slot5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slot1" />
+
+    <Button
+        android:id="@+id/slot3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="347dp"
+        android:text="11:00am - 12:00pm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/slot6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slot2" />
+
+    <Button
+        android:id="@+id/slot4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginBottom="33dp"
+        android:text="1:00pm - 2:00pm"
+        app:layout_constraintBottom_toTopOf="@+id/slot5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/slot1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/slot5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="37dp"
+        android:text="2:00pm - 3:00pm"
+        app:layout_constraintBottom_toTopOf="@+id/slot6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/slot2"
+        app:layout_constraintTop_toBottomOf="@+id/slot4" />
+
+    <Button
+        android:id="@+id/slot6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="40dp"
+        android:text="3:00pm - 4:00pm"
+        app:layout_constraintBottom_toTopOf="@+id/slot7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/slot3"
+        app:layout_constraintTop_toBottomOf="@+id/slot5" />
+
+    <Button
+        android:id="@+id/slot7"
+        android:layout_width="166dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginRight="88dp"
+        android:layout_marginBottom="255dp"
+        android:text="4:00pm - 5:00pm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/slot6"
+        app:layout_constraintTop_toBottomOf="@+id/slot6" />
+</androidx.constraintlayout.widget.ConstraintLayout>

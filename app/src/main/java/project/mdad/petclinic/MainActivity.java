@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String ipBaseAddress = "http://172.30.31.51/petclinic";
+//    public static String ipBaseAddress = "http://172.30.31.51/petclinic";
+    public static String ipBaseAddress = "http://mdadproject.atspace.cc/petClinic";
+
     ImageButton imgBtnViewPet;
     ImageButton imgBtnAddPet;
     ImageButton imgBtnMedicalRecords;

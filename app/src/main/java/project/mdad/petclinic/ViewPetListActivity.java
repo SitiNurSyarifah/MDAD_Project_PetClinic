@@ -2,6 +2,7 @@ package project.mdad.petclinic;
 
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -162,7 +163,7 @@ public class ViewPetListActivity extends ListActivity {
                  * */
                 ListAdapter adapter = new SimpleAdapter(
                         ViewPetListActivity.this, petList,
-                        R.layout.list_records, new String[] { TAG_PID,
+                        R.layout.list_pets, new String[] { TAG_PID,
                         TAG_NAME},
                         new int[] { R.id.pid, R.id.petName });
                 // updating listview

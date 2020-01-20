@@ -12,16 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".SuccesBookedActivity"></activity>
+        <activity android:name=".BookAppointmentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,12 +23,11 @@
         <activity android:name=".ViewPetListActivity" />
         <activity android:name=".ViewPetDetailsActivity" />
         <activity android:name=".AddPetActivity" />
-        <activity android:name=".BookAppointmentActivity" />
         <activity android:name=".ViewBillsActivity" />
-        <activity android:name=".MedicalListActivity"/>
-        <activity android:name=".ConfirmBookingActivity"/>
+        <activity android:name=".MedicalListActivity" />
+        <activity android:name=".ConfirmBookingActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".SuccesBookedActivity"/>
-
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,6 +22,7 @@ public class ConfirmBookingActivity extends AppCompatActivity {
     Button slot5;
     Button slot6;
     Button slot7;
+    boolean check = false;
 
     String responseServer;
 
@@ -48,20 +48,21 @@ public class ConfirmBookingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_booking);
+
         slot1 = (Button) findViewById(R.id.slot1);
-        slot1.setOnTouchListener(new View.OnTouchListener() {
+        slot1.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    slot1.setBackgroundColor(Color.RED);
-                } else if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    slot1.setBackgroundColor(Color.BLUE);
-                }
-                return false;
+            public void onClick(View arg0) {
+                check = true;
+                slot1.setBackgroundColor(Color.RED);
             }
-
         });
+
+        if (check == true) {
+            slot1.setBackgroundColor(Color.GREEN);
+            //slot1.setBackgroundColor(Color.BLUE);
+        }
         slot2 = (Button) findViewById(R.id.slot2);
         slot3 = (Button) findViewById(R.id.slot3);
         slot4 = (Button) findViewById(R.id.slot4);

@@ -35,12 +35,12 @@ public class MedicalListActivity extends ListActivity {
     private static String url_medical_list = MainActivity.ipBaseAddress+"/get_medical_record.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_RECORDS = "medrecords";
+    private static final String TAG_RECORDS = "medRecords";
     private static final String TAG_PID = "pid";
     private static final String TAG_VACCINATION = "vaccination";
 
     // products JSONArray
-    JSONArray medrecords = null;
+    JSONArray medRecords = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -148,11 +148,11 @@ public class MedicalListActivity extends ListActivity {
 
                 // products found
                 // Getting Array of Products
-                medrecords = response.getJSONArray(TAG_RECORDS);
+                medRecords = response.getJSONArray(TAG_RECORDS);
 
                 // looping through All Products
-                for (int i = 0; i < medrecords.length(); i++) {
-                    JSONObject c = medrecords.getJSONObject(i);
+                for (int i = 0; i < medRecords.length(); i++) {
+                    JSONObject c = medRecords.getJSONObject(i);
 
                     // Storing each json item in variable
                     String id = c.getString(TAG_PID);

@@ -32,10 +32,10 @@ public class MedicalListActivity extends ListActivity {
     ArrayList<HashMap<String, String>> medicalList;
   // private ProgressDialog pDialog;
     // url to get all products list
-    private static String url_medical_list = project.mdad.petclinic.MainActivity.ipBaseAddress+"/get_medical_record.php";
+    private static String url_medical_list = MainActivity.ipBaseAddress+"/get_medical_record.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_RECORDS = "records";
+    private static final String TAG_RECORDS = "medrecords";
     private static final String TAG_PID = "pid";
     private static final String TAG_VACCINATION = "vaccination";
 
@@ -78,7 +78,7 @@ public class MedicalListActivity extends ListActivity {
                 // getting values from selected ListItem
                 String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
                 // Starting new intent
-                Intent in = new Intent(getApplicationContext(), ViewPetListActivity.class);
+                Intent in = new Intent(getApplicationContext(), MedicalListActivity.class); //edit
                 // sending pid to next activity
                 in.putExtra(TAG_PID, pid);
                 // starting new activity and expecting some response back
@@ -174,9 +174,9 @@ public class MedicalListActivity extends ListActivity {
                  * */
                 ListAdapter adapter = new SimpleAdapter(
                         MedicalListActivity.this, medicalList,
-                        R.layout.list_pets, new String[] { TAG_PID,
+                        R.layout.list_meds, new String[] { TAG_PID,
                         TAG_VACCINATION},
-                        new int[] { R.id.pid, R.id.vaccination});
+                        new int[] { R.id.pid, R.id.vaccination}); //vaccination = name
                 // updating listview
                 setListAdapter(adapter);
 

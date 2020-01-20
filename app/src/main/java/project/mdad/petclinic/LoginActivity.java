@@ -24,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText mPassword, mUserName;
     private Button btnSignIn;
-    //private static final String url_login = MainActivity.ipBaseAddress + "/LoginJ.php";
-    private static final String url_login = "http://172.30.30.97/petclinic/LoginJ.php";
+    private static final String url_login = MainActivity.ipBaseAddress + "/LoginJ.php";
+//    private static final String url_login = "http://172.30.30.97/petclinic/LoginJ.php";
 
 
     // JSON Node names

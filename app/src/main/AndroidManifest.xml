@@ -33,6 +33,9 @@
         <activity android:name=".AddPetActivity" />
         <activity android:name=".BookAppointmentActivity" />
         <activity android:name=".ViewBillsActivity" />
+        <activity android:name=".MedicalListActivity"/>
+        <activity android:name=".ConfirmBookingActivity"/>
+        <activity android:name=".SuccesBookedActivity"/>
 
     </application>
 

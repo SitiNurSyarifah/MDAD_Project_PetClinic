@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Launching view bills Activity
-                Intent i = new Intent(getApplicationContext(), ViewBillsActivity.class);
+                Intent i = new Intent(getApplicationContext(), BillsHistoryActivity.class);
                 startActivity(i);
             }
         });

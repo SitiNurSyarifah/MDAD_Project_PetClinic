@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class BillsHistoryActivity extends ListActivity {
 
     ArrayList<HashMap<String, String>> billHistoryList;
-    private static String url_bill_history = MainActivity.ipBaseAddress+"/bill_history.php";
+    private static String url_bill_history = MainActivity.ipBaseAddress + "/bill_history.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_BILLHISTORY = "billHistory";
@@ -35,7 +35,7 @@ public class BillsHistoryActivity extends ListActivity {
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_DESCRIPTION = "description";
     private static final String TAG_DATEOFBILL = "date_of_bill";
-    private static final String TAG_PRICE = "price";
+    private static final String TAG_CHARGEPRICE = "charge_price";
 
     // products JSONArray
     JSONArray billHistory = null;
@@ -48,7 +48,7 @@ public class BillsHistoryActivity extends ListActivity {
         billHistoryList = new ArrayList<HashMap<String, String>>();
 
         // Loading products in Background Thread
-        postData(url_bill_history,null );
+        postData(url_bill_history, null);
         // Get listview from list_items.xml
         ListView lv = getListView();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,7 +91,7 @@ public class BillsHistoryActivity extends ListActivity {
     }
 
 
-    public void postData(String url, final JSONObject json){
+    public void postData(String url, final JSONObject json) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
@@ -124,9 +124,9 @@ public class BillsHistoryActivity extends ListActivity {
         requestQueue.add(json_obj_req);
     }
 
-    private void checkResponse(JSONObject response, JSONObject creds){
+    private void checkResponse(JSONObject response, JSONObject creds) {
         try {
-            if(response.getInt(TAG_SUCCESS)==1){
+            if (response.getInt(TAG_SUCCESS) == 1) {
 
                 // products found
                 // Getting Array of Products
@@ -141,7 +141,7 @@ public class BillsHistoryActivity extends ListActivity {
                     String petName = c.getString(TAG_PETNAME);
                     String description = c.getString(TAG_DESCRIPTION);
                     String dateOfBill = c.getString(TAG_DATEOFBILL);
-                    String price = c.getString(TAG_PRICE);
+                    String chargePrice = c.getString(TAG_CHARGEPRICE);
 
 
                     // creating new HashMap
@@ -152,8 +152,7 @@ public class BillsHistoryActivity extends ListActivity {
                     map.put(TAG_PETNAME, petName);
                     map.put(TAG_DESCRIPTION, description);
                     map.put(TAG_DATEOFBILL, dateOfBill);
-                    map.put(TAG_PRICE, price);
-
+                    map.put(TAG_CHARGEPRICE, chargePrice);
 
                     // adding HashList to ArrayList
                     billHistoryList.add(map);
@@ -164,16 +163,14 @@ public class BillsHistoryActivity extends ListActivity {
                  * */
                 ListAdapter adapter = new SimpleAdapter(
                         BillsHistoryActivity.this, billHistoryList,
-                        R.layout.list_bill_history, new String[] { TAG_BILLID,
-                        TAG_PETNAME,TAG_DESCRIPTION,TAG_DATEOFBILL,TAG_PRICE},
-                        new int[] { R.id.pid, R.id.petName,
-                                R.id.description,R.id.dateOfBill,R.id.price });
+                        R.layout.list_bill_history, new String[]{TAG_BILLID,
+                        TAG_PETNAME, TAG_DESCRIPTION, TAG_DATEOFBILL, TAG_CHARGEPRICE},
+                        new int[]{R.id.pid, R.id.petName,
+                                R.id.description, R.id.dateOfBill, R.id.chargePrice});
                 // updating listview
                 setListAdapter(adapter);
 
-            }
-            else{
-
+            } else {
             }
 
         } catch (JSONException e) {

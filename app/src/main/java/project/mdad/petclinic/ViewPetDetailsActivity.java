@@ -70,7 +70,7 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
         btnViewMedRec = (Button) findViewById(R.id.btnViewMedRec);
         btnUpdate = (Button) findViewById(R.id.btnUpdate);
         btnDelete = (Button) findViewById(R.id.btnDelete);
-        Log.i("url_product_details", url_pet_details);
+
         // getting product details from intent
         Intent i = getIntent();
         // getting product id (pid) from intent
@@ -150,7 +150,7 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
 
     }
 
-    public void postData(String url, final JSONObject json, final int option){
+    public void postData(String url, final JSONObject json, final int option) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
@@ -158,9 +158,13 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
 
-                switch (option){
-                    case 1:checkResponseEditPet(response); break;
-                    case 2:checkResponseSave_delete_Pet(response); break;
+                switch (option) {
+                    case 1:
+                        checkResponseEditPet(response);
+                        break;
+                    case 2:
+                        checkResponseSave_delete_Pet(response);
+                        break;
 
                 }
 
@@ -179,18 +183,17 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
         requestQueue.add(json_obj_req);
     }
 
-    public void checkResponseSave_delete_Pet(JSONObject response)
-    {
+    public void checkResponseSave_delete_Pet(JSONObject response) {
 
         try {
-            if(response.getInt("success")==1){
+            if (response.getInt("success") == 1) {
                 // successfully updated
                 Intent i = getIntent();
                 // send result code 100 to notify about product update
                 setResult(100, i);
                 finish();
 
-            }else{
+            } else {
                 // product with pid not found
             }
 

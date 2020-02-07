@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SuccessBookedActivity">
+
+    <TextView
+        android:id="@+id/txtsuccess"
+        android:layout_width="283dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="273dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginRight="49dp"
+        android:layout_marginBottom="18dp"
+        android:text="Successful Book! See you there!"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/booking_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/booking_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/time_slots"
+        app:layout_constraintEnd_toStartOf="@+id/time_slots"
+        app:layout_constraintStart_toStartOf="@+id/time_slots"
+        app:layout_constraintTop_toBottomOf="@+id/txtsuccess" />
+
+    <TextView
+        android:id="@+id/time_slots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="276dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtsuccess"
+        app:layout_constraintTop_toBottomOf="@+id/booking_date" />
+</androidx.constraintlayout.widget.ConstraintLayout>

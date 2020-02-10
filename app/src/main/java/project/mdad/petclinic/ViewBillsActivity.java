@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -27,9 +26,9 @@ public class ViewBillsActivity extends AppCompatActivity {
     TextView tvPetName;
     TextView tvBillNumber;
     TextView tvBillStatus;
-    TextView tvDescription;
-    TextView tvDateOfBill;
-    TextView tvPrice;
+    TextView tvChargeAmt;
+    TextView tvTotalAmt;
+
 
     Button btnOk;
     // Response
@@ -51,18 +50,15 @@ public class ViewBillsActivity extends AppCompatActivity {
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_BILLNUMBER = "bill_number";
     private static final String TAG_BILLSTATUS = "bill_status";
-    private static final String TAG_DESCRIPTION = "description";
-    private static final String TAG_DATEOFBILL = "date_of_bill";
-    private static final String TAG_PRICE = "price";
+    private static final String TAG_CHARGEAMOUNT = "charge_amount";
+    private static final String TAG_TOTALAMOUNT = "total_amount";
 
 
     private static String billPetName = "";
     private static String billBillNumber = "";
     private static String billBillStatus = "";
-    private static String billDescription = "";
-    private static String billDateOfBill = "";
-    private static String billPrice = "";
-
+    private static String billChargeAmount = "";
+    private static String billTotalAmt = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +66,12 @@ public class ViewBillsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_bills);
         btnOk = (Button) findViewById(R.id.btnOk);
 
-        // getting product details from intent
+        // getting bill details from intent
         Intent i = getIntent();
-        // getting product id (pid) from intent
+        // getting bill id (pid) from intent
         pid = i.getStringExtra(TAG_BILLID);
 
-        // Getting complete product details in background thread
+        // Getting complete bill details in background thread
         JSONObject dataJson = new JSONObject();
         try {
             dataJson.put("pid", pid);
@@ -87,28 +83,29 @@ public class ViewBillsActivity extends AppCompatActivity {
 
         postData(url_bill_details, dataJson, 1);
 
-        // view pet click event
+        // view bill history click event
         btnOk.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                // Launching view pet list Activity
+                // Launching view bill history Activity
                 Intent i = new Intent(getApplicationContext(), BillsHistoryActivity.class);
                 startActivity(i);
             }
         });
     }
-    public void postData(String url, final JSONObject json, final int option){
+
+    public void postData(String url, final JSONObject json, final int option) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-
-                switch (option){
-                    case 1:checkResponseEditPet(response); break;
-
+                switch (option) {
+                    case 1:
+                        checkResponseViewBill(response);
+                        break;
                 }
 
             }
@@ -126,37 +123,34 @@ public class ViewBillsActivity extends AppCompatActivity {
         requestQueue.add(json_obj_req);
     }
 
-    public void checkResponseEditPet(JSONObject response) {
+    public void checkResponseViewBill(JSONObject response) {
         try {
             if (response.getInt(TAG_SUCCESS) == 1) {
-                // successfully received product details
+                // successfully received bill details
                 JSONArray petObj = response.getJSONArray(TAG_BILLHISTORY); // JSON Array
-                // get first product object from JSON Array
+                // get first bill object from JSON Array
                 JSONObject billHist = petObj.getJSONObject(0);
                 billPetName = billHist.getString(TAG_PETNAME);
                 billBillNumber = billHist.getString(TAG_BILLNUMBER);
                 billBillStatus = billHist.getString(TAG_BILLSTATUS);
-                billDescription = billHist.getString(TAG_DESCRIPTION);
-                billDateOfBill = billHist.getString(TAG_DATEOFBILL);
-                billPrice = billHist.getString(TAG_PRICE);
+                billChargeAmount = "$" + billHist.getString(TAG_CHARGEAMOUNT);
+                billTotalAmt = "$" + billHist.getString(TAG_TOTALAMOUNT);
 
 
-//                Log.i("---Prod details",prodName+"  "+prodPrice+"  "+prodDesc);
                 tvPetName = (TextView) findViewById(R.id.tvPetName);
                 tvBillNumber = (TextView) findViewById(R.id.tvBillNumber);
                 tvBillStatus = (TextView) findViewById(R.id.tvBillStatus);
-                //tvDescription = (EditText) findViewById(R.id.tv);
-                //tvDateOfBill = (EditText) findViewById(R.id.etWeight);
-                tvPrice = (TextView) findViewById(R.id.tvChargeAmt);
+                tvChargeAmt = (TextView) findViewById(R.id.tvChargeAmt);
+                tvTotalAmt = (TextView) findViewById(R.id.tvTotalAmt);
 
 
-                // display product data in EditText
+                // display bill data in EditText
                 tvPetName.setText(billPetName);
                 tvBillNumber.setText(billBillNumber);
                 tvBillStatus.setText(billBillStatus);
-                //tvDescription.setText(billDescription);
-               // tvDateOfBill.setText(billDateOfBill);
-                tvPrice.setText(billPrice);
+                tvChargeAmt.setText(billChargeAmount);
+                tvTotalAmt.setText(billTotalAmt);
+
 
             } else {
                 // product with pid not found

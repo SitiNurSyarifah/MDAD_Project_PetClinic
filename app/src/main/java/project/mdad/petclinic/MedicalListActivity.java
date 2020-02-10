@@ -38,6 +38,11 @@ public class MedicalListActivity extends ListActivity {
     private static final String TAG_RECORDS = "medRecords";
     private static final String TAG_PID = "pid";
     private static final String TAG_VACCINATION = "vaccination";
+    private static final String TAG_DIESEASE = "disease";
+    private static final String TAG_CHECKUPS = "checkups";
+    private static final String TAG_CIRCUMCISION = "circumcision";
+
+
 
     // products JSONArray
     JSONArray medRecords = null;
@@ -157,6 +162,10 @@ public class MedicalListActivity extends ListActivity {
                     // Storing each json item in variable
                     String id = c.getString(TAG_PID);
                     String vaccination = c.getString(TAG_VACCINATION);
+                    String disease = c.getString(TAG_DIESEASE);
+                    String checkups = c.getString(TAG_CHECKUPS);
+                    String circumcision = c.getString(TAG_CIRCUMCISION);
+
 
                     // creating new HashMap
                     HashMap<String, String> map = new HashMap<String, String>();
@@ -164,6 +173,9 @@ public class MedicalListActivity extends ListActivity {
                     // adding each child node to HashMap key => value
                     map.put(TAG_PID, id);
                     map.put(TAG_VACCINATION, vaccination);
+                    map.put(TAG_DIESEASE, disease);
+                    map.put(TAG_CHECKUPS, checkups);
+                    map.put(TAG_CIRCUMCISION, circumcision);
 
                     // adding HashList to ArrayList
                     medicalList.add(map);
@@ -175,8 +187,8 @@ public class MedicalListActivity extends ListActivity {
                 ListAdapter adapter = new SimpleAdapter(
                         MedicalListActivity.this, medicalList,
                         R.layout.list_meds, new String[] { TAG_PID,
-                        TAG_VACCINATION},
-                        new int[] { R.id.pid, R.id.vaccination}); //vaccination = name
+                        TAG_VACCINATION,TAG_DIESEASE,TAG_CHECKUPS,TAG_CIRCUMCISION},
+                        new int[] { R.id.pid, R.id.vaccination,R.id.tvDisease,R.id.tvCheckUps,R.id.tvCircumcision}); //vaccination = name
                 // updating listview
                 setListAdapter(adapter);
 

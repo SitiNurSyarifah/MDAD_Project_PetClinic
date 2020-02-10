@@ -31,7 +31,7 @@ public class ViewPetListActivity extends ListActivity {
 
 
     ArrayList<HashMap<String, String>> petList;
-    private static String url_pet_list = MainActivity.ipBaseAddress+"/get_user_pets.php";
+    private static String url_pet_list = MainActivity.ipBaseAddress + "/get_user_pets.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PETDETAILS = "petDetails";
@@ -49,7 +49,7 @@ public class ViewPetListActivity extends ListActivity {
         petList = new ArrayList<HashMap<String, String>>();
 
         // Loading products in Background Thread
-        postData(url_pet_list,null );
+        postData(url_pet_list, null);
 
 
         // Get listview from list_items.xml
@@ -97,7 +97,7 @@ public class ViewPetListActivity extends ListActivity {
     }
 
 
-    public void postData(String url, final JSONObject json){
+    public void postData(String url, final JSONObject json) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
@@ -130,9 +130,9 @@ public class ViewPetListActivity extends ListActivity {
         requestQueue.add(json_obj_req);
     }
 
-    private void checkResponse(JSONObject response, JSONObject creds){
+    private void checkResponse(JSONObject response, JSONObject creds) {
         try {
-            if(response.getInt(TAG_SUCCESS)==1){
+            if (response.getInt(TAG_SUCCESS) == 1) {
 
                 // products found
                 // Getting Array of Products
@@ -162,14 +162,13 @@ public class ViewPetListActivity extends ListActivity {
                  * */
                 ListAdapter adapter = new SimpleAdapter(
                         ViewPetListActivity.this, petList,
-                        R.layout.list_pets, new String[] { TAG_PID,
+                        R.layout.list_pets, new String[]{TAG_PID,
                         TAG_NAME},
-                        new int[] { R.id.pid, R.id.petName });
+                        new int[]{R.id.pid, R.id.petName});
                 // updating listview
                 setListAdapter(adapter);
 
-            }
-            else{
+            } else {
 
             }
 

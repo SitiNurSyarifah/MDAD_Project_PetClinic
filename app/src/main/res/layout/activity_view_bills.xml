@@ -120,6 +120,7 @@
         android:id="@+id/tvChargeAmt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="32dp"
@@ -150,7 +151,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="34dp"
-        android:text="$"
+        android:text="$15"
         app:layout_constraintBottom_toTopOf="@+id/tvGSTAmt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvConsultation"
@@ -166,7 +167,7 @@
         android:layout_marginRight="46dp"
         android:layout_marginBottom="16dp"
         android:text="GST"
-        app:layout_constraintBottom_toTopOf="@+id/tvTotalCharge"
+        app:layout_constraintBottom_toTopOf="@+id/tvTotal"
         app:layout_constraintEnd_toStartOf="@+id/tvGSTAmt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvConsultation" />
@@ -179,13 +180,13 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="33dp"
         android:text="$3.27"
-        app:layout_constraintBottom_toTopOf="@+id/tvTotalChargeAmt"
+        app:layout_constraintBottom_toTopOf="@+id/tvTotalAmt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvGST"
         app:layout_constraintTop_toBottomOf="@+id/tvConsultationAmt" />
 
     <TextView
-        android:id="@+id/tvTotalCharge"
+        android:id="@+id/tvTotal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
@@ -195,21 +196,21 @@
         android:layout_marginBottom="20dp"
         android:text="Total Charge"
         app:layout_constraintBottom_toTopOf="@+id/btnOk"
-        app:layout_constraintEnd_toStartOf="@+id/tvTotalChargeAmt"
+        app:layout_constraintEnd_toStartOf="@+id/tvTotalAmt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGST" />
 
     <TextView
-        android:id="@+id/tvTotalChargeAmt"
+        android:id="@+id/tvTotalAmt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="186dp"
+        android:layout_marginBottom="192dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvTotalCharge"
+        app:layout_constraintStart_toEndOf="@+id/tvTotal"
         app:layout_constraintTop_toBottomOf="@+id/tvGSTAmt" />
 
     <Button
@@ -226,6 +227,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotalCharge" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

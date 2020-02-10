@@ -23,7 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookAppointmentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Button btnchangedate;
+    //Button btnchangedate;
     Button btnConfirm;
     CalendarView calendarView;
     TextView booking_date;
@@ -45,7 +44,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
     private ProgressDialog pDialog;
     private static final String url_booking = MainActivity.ipBaseAddress + "/confirm_booking.php";
     private static final String url_update_booking = MainActivity.ipBaseAddress+"/update_booking.php";
-    private static final String TAG_BOOKING = "booking";
+   // private static final String TAG_BOOKING = "booking";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PID = "pid";
     private static final String TAG_BOOKING_DATE = "booking_date";
@@ -64,7 +63,8 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
         booking_date = (TextView) findViewById(R.id.booking_date);
-        btnchangedate = (Button) findViewById(R.id.btnchangedate);
+        //calendarView.setSelected(Color.parseColor("#00BCD4"));
+       // btnchangedate = (Button) findViewById(R.id.btnchangedate);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         btnConfirm = (Button) findViewById(R.id.btnConfirm);
         spinner.setOnItemSelectedListener(this);
@@ -133,27 +133,27 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
             }
         });
 
-    btnchangedate.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View arg0) {
-            pDialog = new ProgressDialog(BookAppointmentActivity.this);
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
+    //btnchangedate.setOnClickListener(new View.OnClickListener() {
+      //  @Override
+        //public void onClick(View arg0) {
+          //  pDialog = new ProgressDialog(BookAppointmentActivity.this);
+            //pDialog.setIndeterminate(false);
+            //pDialog.setCancelable(true);
+            //pDialog.show();
 
             // deleting product in background thread
 
-            JSONObject dataJson = new JSONObject();
-            try{
-                dataJson.put("pid", pid);
-            }catch(JSONException e){
+            //JSONObject dataJson = new JSONObject();
+            //try{
+              //  dataJson.put("pid", pid);
+            //}catch(JSONException e){
 
-            }
-            postData(url_update_booking,dataJson,2);
+            //}
+            //postData(url_update_booking,dataJson,2);
 
 
-        }
-    });
+        //}
+    //});
 
 }
     public void postData(String url, final JSONObject json, final int option){
@@ -166,7 +166,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
                 switch (option){
                     case 1:checkResponseCreate_Product(response);
-                    case 2:checkResponseEditProduct(response);
+                   // case 2:checkResponseEditProduct(response);
                         break;
                 }
             }
@@ -206,48 +206,48 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
     }
 
-    public void checkResponseEditProduct(JSONObject response)
-    {
-        try {
-            if(response.getInt("success")==1){
+    //public void checkResponseEditProduct(JSONObject response)
+    //{
+      //  try {
+        //    if(response.getInt("success")==1){
                 // successfully received product details
-                JSONArray productObj = response.getJSONArray(TAG_BOOKING); // JSON Array
+          //      JSONArray productObj = response.getJSONArray(TAG_BOOKING); // JSON Array
                 // get first product object from JSON Array
-                JSONObject product = productObj.getJSONObject(0);
-                date=product.getString(TAG_BOOKING_DATE);
-                time_slots=product.getString(TAG_TIME_SLOTS);
+            //    JSONObject product = productObj.getJSONObject(0);
+              //  date=product.getString(TAG_BOOKING_DATE);
+                //time_slots=product.getString(TAG_TIME_SLOTS);
 
 
 //                Log.i("---Prod details",prodName+"  "+prodPrice+"  "+prodDesc);
-                booking_date = (TextView) findViewById(R.id.booking_date);
-                final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+                //booking_date = (TextView) findViewById(R.id.booking_date);
+                //final Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
 
                 // display product data in EditText
-                booking_date.setText(date);
-                spinner.getSelectedItem();
+                //booking_date.setText(date);
+                //spinner.getSelectedItem();
 
 
 
 
-            }else{
+//            }else{
                 // product with pid not found
-            }
+  //          }
 
-        } catch (JSONException e) {
-            e.printStackTrace();
+    //    } catch (JSONException e) {
+      //      e.printStackTrace();
 
-        }
+        //}
 
 
-    }
+    //}
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
         String item = parent.getItemAtPosition(position).toString();
 
         // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        Toast.makeText(parent.getContext(), "Selected Time: " + item, Toast.LENGTH_LONG).show();
 
     }
 

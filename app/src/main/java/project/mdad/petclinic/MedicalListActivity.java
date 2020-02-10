@@ -9,7 +9,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,19 +30,22 @@ public class MedicalListActivity extends ListActivity {
 
 
     ArrayList<HashMap<String, String>> medicalList;
-  // private ProgressDialog pDialog;
+    // private ProgressDialog pDialog;
     // url to get all products list
-    private static String url_medical_list = MainActivity.ipBaseAddress+"/get_medical_record.php";
+    private static String url_medical_list = MainActivity.ipBaseAddress + "/get_medical_record.php";
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_RECORDS = "medRecords";
+    private static final String TAG_MEDRECORDS = "medRecords";
     private static final String TAG_PID = "pid";
     private static final String TAG_VACCINATION = "vaccination";
-    private static final String TAG_DIESEASE = "disease";
+    private static final String TAG_DISEASE = "disease";
     private static final String TAG_CHECKUPS = "checkups";
     private static final String TAG_CIRCUMCISION = "circumcision";
 
+    String pid;
 
+
+    //static InputStream is = null;
 
     // products JSONArray
     JSONArray medRecords = null;
@@ -52,22 +55,25 @@ public class MedicalListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_list);
 
-
-        //   Log.i("------url_all_products",url_all_products);
         // Hashmap for ListView
         medicalList = new ArrayList<HashMap<String, String>>();
-        
-        //pDialog = new ProgressDialog(this);
-        //pDialog.setMessage("Loading medical list ...");
-        //pDialog.setIndeterminate(false);
-        //pDialog.setCancelable(true);
-       // pDialog.show();
 
+        Intent i = getIntent();
+        // getting product id (pid) from intent
+        pid = i.getStringExtra(TAG_PID);
+        Toast.makeText(this, "Record " + pid, Toast.LENGTH_SHORT).show();
+        // Getting complete product details in background thread
+        JSONObject dataJson = new JSONObject();
+        try {
+            dataJson.put("pid", pid);
+            //     dataJson.put("password", "def");
+
+        } catch (JSONException e) {
+
+        }
 
         // Loading products in Background Thread
-        postData(url_medical_list,null );
-
-
+        postData(url_medical_list, dataJson);
 
 
         // Get listview from list_items.xml
@@ -80,14 +86,14 @@ public class MedicalListActivity extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // getting values from selected ListItem
-                String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
-                // Starting new intent
-                Intent in = new Intent(getApplicationContext(), MedicalListActivity.class); //edit
-                // sending pid to next activity
-                in.putExtra(TAG_PID, pid);
-                // starting new activity and expecting some response back
-                startActivityForResult(in, 100);
+//                // getting values from selected ListItem
+//                String pid = ((TextView) view.findViewById(R.id.pid)).getText().toString();
+//                // Starting new intent
+//                Intent in = new Intent(getApplicationContext(), MedicalListActivity.class); //edit
+//                // sending pid to next activity
+//                in.putExtra(TAG_PID, pid);
+//                // starting new activity and expecting some response back
+//                startActivityForResult(in, 100);
 
             }
         });
@@ -114,14 +120,13 @@ public class MedicalListActivity extends ListActivity {
     }
 
 
-    public void postData(String url, final JSONObject json){
+    public void postData(String url, final JSONObject json) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                checkResponse(response, json);
+                checkResponse(response);
 
 //                String alert_message;
 //                alert_message = response.toString();
@@ -138,7 +143,7 @@ public class MedicalListActivity extends ListActivity {
 //                String alert_message;
 //                alert_message = error.toString();
 
-//                showAlertDialogue("Error", alert_message);
+         //       showAlertDialogue("Error", alert_message);
 
             }
 
@@ -147,14 +152,13 @@ public class MedicalListActivity extends ListActivity {
         requestQueue.add(json_obj_req);
     }
 
-    private void checkResponse(JSONObject response, JSONObject creds){
+    private void checkResponse(JSONObject response) {
         try {
-            if(response.getInt(TAG_SUCCESS)==1){
+            if (response.getInt(TAG_SUCCESS) == 1) {
 
                 // products found
                 // Getting Array of Products
-                medRecords = response.getJSONArray(TAG_RECORDS);
-
+                medRecords = response.getJSONArray(TAG_MEDRECORDS);
                 // looping through All Products
                 for (int i = 0; i < medRecords.length(); i++) {
                     JSONObject c = medRecords.getJSONObject(i);
@@ -162,7 +166,7 @@ public class MedicalListActivity extends ListActivity {
                     // Storing each json item in variable
                     String id = c.getString(TAG_PID);
                     String vaccination = c.getString(TAG_VACCINATION);
-                    String disease = c.getString(TAG_DIESEASE);
+                    String disease = c.getString(TAG_DISEASE);
                     String checkups = c.getString(TAG_CHECKUPS);
                     String circumcision = c.getString(TAG_CIRCUMCISION);
 
@@ -173,7 +177,7 @@ public class MedicalListActivity extends ListActivity {
                     // adding each child node to HashMap key => value
                     map.put(TAG_PID, id);
                     map.put(TAG_VACCINATION, vaccination);
-                    map.put(TAG_DIESEASE, disease);
+                    map.put(TAG_DISEASE, disease);
                     map.put(TAG_CHECKUPS, checkups);
                     map.put(TAG_CIRCUMCISION, circumcision);
 
@@ -186,14 +190,13 @@ public class MedicalListActivity extends ListActivity {
                  * */
                 ListAdapter adapter = new SimpleAdapter(
                         MedicalListActivity.this, medicalList,
-                        R.layout.list_meds, new String[] { TAG_PID,
-                        TAG_VACCINATION,TAG_DIESEASE,TAG_CHECKUPS,TAG_CIRCUMCISION},
-                        new int[] { R.id.pid, R.id.vaccination,R.id.tvDisease,R.id.tvCheckUps,R.id.tvCircumcision}); //vaccination = name
+                        R.layout.list_meds, new String[]{TAG_PID,
+                        TAG_VACCINATION, TAG_DISEASE, TAG_CHECKUPS, TAG_CIRCUMCISION},
+                        new int[]{R.id.pid, R.id.vaccination, R.id.tvDisease, R.id.tvCheckUps, R.id.tvCircumcision}); //vaccination = name
                 // updating listview
                 setListAdapter(adapter);
 
-            }
-            else{
+            } else {
 
             }
 

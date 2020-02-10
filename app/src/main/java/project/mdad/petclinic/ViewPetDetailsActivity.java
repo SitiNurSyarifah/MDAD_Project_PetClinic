@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,17 +44,19 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     private static final String url_pet_details = MainActivity.ipBaseAddress + "/get_pet_details.php";
     private static final String url_pet_update = MainActivity.ipBaseAddress + "/update_pet.php";
     private static final String url_pet_delete = MainActivity.ipBaseAddress + "/delete_pet.php";
-
+    private static final String url_pet_medRecords = MainActivity.ipBaseAddress+ "/get_medical_record.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PETDETAILS = "petDetails";
+    private static final String TAG_PETMEDRECORDS = "medicalRecords";
     private static final String TAG_PID = "pid";
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_GENDER = "gender";
     private static final String TAG_DOB = "dob";
     private static final String TAG_BREED = "breed";
     private static final String TAG_WEIGHT = "weight";
+
 
 
     private static String petPetName = "";
@@ -93,10 +96,19 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                JSONObject dataJson = new JSONObject();
+                try {
+                    dataJson.put("pid", pid);
+                } catch (JSONException e) {
+
+                }
+                postData(url_pet_medRecords,dataJson,3);
+
                 // Launching view pet list Activity
-                Intent i = new Intent(getApplicationContext(), MedicalListActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(getApplicationContext(), MedicalListActivity.class);
+//                startActivity(i);
             }
+
         });
 
         // save button click event
@@ -165,6 +177,10 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
                     case 2:
                         checkResponseSave_delete_Pet(response);
                         break;
+                    case 3:
+                        checkResponseMedRecord(response);
+                        break;
+
 
                 }
 
@@ -181,6 +197,28 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
 
         });
         requestQueue.add(json_obj_req);
+    }
+
+    public void checkResponseMedRecord(JSONObject response) {
+        try {
+            if (response.getInt("success") == 1) {
+                finish();
+                Intent i = new Intent(getApplicationContext(), MedicalListActivity.class);
+                i.putExtra(TAG_PID,pid);
+                startActivity(i);
+
+
+            } else {
+                Toast.makeText(this, "No record", Toast.LENGTH_SHORT).show();
+                // product with pid not found
+            }
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+
+        }
+
     }
 
     public void checkResponseSave_delete_Pet(JSONObject response) {

@@ -9,6 +9,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,7 +32,9 @@ public class BillsHistoryActivity extends ListActivity {
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_BILLHISTORY = "billHistory";
+    private static final String TAG_PID = "pid";
     private static final String TAG_BILLID = "bill_id";
+    private static final String TAG_USERNAME = "username";
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_DESCRIPTION = "description";
     private static final String TAG_DATEOFBILL = "date_of_bill";
@@ -39,6 +42,7 @@ public class BillsHistoryActivity extends ListActivity {
 
     // products JSONArray
     JSONArray billHistory = null;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +50,24 @@ public class BillsHistoryActivity extends ListActivity {
         setContentView(R.layout.activity_bills_history);
 
         billHistoryList = new ArrayList<HashMap<String, String>>();
+        // getting bill details from intent
+        Intent i = getIntent();
+        // getting bill id (pid) from intent
+        username = i.getStringExtra(TAG_USERNAME);
+        Toast.makeText(this, "Record " + username, Toast.LENGTH_SHORT).show();
 
+        // Getting complete bill details in background thread
+        JSONObject dataJson = new JSONObject();
+        try {
+            dataJson.put("username",username);
+            //     dataJson.put("password", "def");
+
+        } catch (JSONException e) {
+
+        }
         // Loading products in Background Thread
-        postData(url_bill_history, null);
+        postData(url_bill_history, dataJson);
+
         // Get listview from list_items.xml
         ListView lv = getListView();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -11,6 +11,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,10 +37,14 @@ public class ViewPetListActivity extends ListActivity {
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PETDETAILS = "petDetails";
     private static final String TAG_PID = "pid";
+    private static final String TAG_USERNAME = "username";
+
     private static final String TAG_NAME = "petName";
 
     // products JSONArray
     JSONArray petDetails = null;
+    String username;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,8 +53,25 @@ public class ViewPetListActivity extends ListActivity {
 
         petList = new ArrayList<HashMap<String, String>>();
 
+        // getting product details from intent
+        // getting product details from intent
+        Intent i = getIntent();
+        // getting product id (pid) from intent
+        username = i.getStringExtra(TAG_USERNAME);
+        Toast.makeText(this, "Record " + username, Toast.LENGTH_SHORT).show();
+
+        // Getting complete product details in background thread
+        JSONObject dataJson = new JSONObject();
+        try {
+            dataJson.put("username", username);
+            //     dataJson.put("password", "def");
+
+        } catch (JSONException e) {
+
+        }
+
         // Loading products in Background Thread
-        postData(url_pet_list, null);
+        postData(url_pet_list, dataJson);
 
 
         // Get listview from list_items.xml
@@ -104,7 +126,7 @@ public class ViewPetListActivity extends ListActivity {
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                checkResponse(response, json);
+                checkResponse(response);
 
 //                String alert_message;
 //                alert_message = response.toString();
@@ -130,7 +152,7 @@ public class ViewPetListActivity extends ListActivity {
         requestQueue.add(json_obj_req);
     }
 
-    private void checkResponse(JSONObject response, JSONObject creds) {
+    private void checkResponse(JSONObject response) {
         try {
             if (response.getInt(TAG_SUCCESS) == 1) {
 

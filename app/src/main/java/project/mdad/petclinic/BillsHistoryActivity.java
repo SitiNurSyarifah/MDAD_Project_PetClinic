@@ -35,7 +35,7 @@ public class BillsHistoryActivity extends ListActivity {
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_DESCRIPTION = "description";
     private static final String TAG_DATEOFBILL = "date_of_bill";
-    private static final String TAG_CHARGEPRICE = "charge_price";
+    private static final String TAG_TOTALAMOUNT = "total_amount";
 
     // products JSONArray
     JSONArray billHistory = null;
@@ -141,7 +141,7 @@ public class BillsHistoryActivity extends ListActivity {
                     String petName = c.getString(TAG_PETNAME);
                     String description = c.getString(TAG_DESCRIPTION);
                     String dateOfBill = c.getString(TAG_DATEOFBILL);
-                    String chargePrice = c.getString(TAG_CHARGEPRICE);
+                    String totalAmount= c.getString(TAG_TOTALAMOUNT);
 
 
                     // creating new HashMap
@@ -152,7 +152,7 @@ public class BillsHistoryActivity extends ListActivity {
                     map.put(TAG_PETNAME, petName);
                     map.put(TAG_DESCRIPTION, description);
                     map.put(TAG_DATEOFBILL, dateOfBill);
-                    map.put(TAG_CHARGEPRICE, chargePrice);
+                    map.put(TAG_TOTALAMOUNT,"$"+totalAmount);
 
                     // adding HashList to ArrayList
                     billHistoryList.add(map);
@@ -164,9 +164,9 @@ public class BillsHistoryActivity extends ListActivity {
                 ListAdapter adapter = new SimpleAdapter(
                         BillsHistoryActivity.this, billHistoryList,
                         R.layout.list_bill_history, new String[]{TAG_BILLID,
-                        TAG_PETNAME, TAG_DESCRIPTION, TAG_DATEOFBILL, TAG_CHARGEPRICE},
+                        TAG_PETNAME, TAG_DESCRIPTION, TAG_DATEOFBILL, TAG_TOTALAMOUNT},
                         new int[]{R.id.pid, R.id.petName,
-                                R.id.description, R.id.dateOfBill, R.id.chargePrice});
+                                R.id.description, R.id.dateOfBill, R.id.totalAmount});
                 // updating listview
                 setListAdapter(adapter);
 

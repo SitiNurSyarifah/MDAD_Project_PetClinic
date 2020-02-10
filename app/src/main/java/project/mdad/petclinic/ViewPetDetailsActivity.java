@@ -220,7 +220,6 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
                 petWeight = petDetail.getString(TAG_WEIGHT);
 
 
-//                Log.i("---Prod details",prodName+"  "+prodPrice+"  "+prodDesc);
                 txtPetName = (EditText) findViewById(R.id.etPetName);
                 txtGender = (EditText) findViewById(R.id.etGender);
                 txtDOB = (EditText) findViewById(R.id.etDOB);

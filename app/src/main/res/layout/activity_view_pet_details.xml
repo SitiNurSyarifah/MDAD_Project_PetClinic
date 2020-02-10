@@ -8,6 +8,22 @@
     tools:context=".ViewPetDetailsActivity">
 
 
+    <EditText
+        android:id="@+id/etDOB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginRight="53dp"
+        android:layout_marginBottom="39dp"
+        android:background="@android:color/white"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/etBreed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvDOB"
+        app:layout_constraintTop_toBottomOf="@+id/etGender" />
+
     <ImageView
         android:id="@+id/ivViewPet"
         android:layout_width="wrap_content"
@@ -38,11 +54,11 @@
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="3dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginLeft="55dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginLeft="54dp"
         android:layout_marginTop="49dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginRight="55dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginRight="54dp"
         android:layout_marginBottom="53dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toTopOf="@+id/tvPetName"
@@ -71,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="51dp"
         android:layout_marginRight="51dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="32dp"
         android:background="@android:color/white"
         android:inputType="textPersonName"
         android:padding="10dp"
@@ -98,15 +114,17 @@
         android:id="@+id/etGender"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="130dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
+        android:layout_marginBottom="117dp"
         android:background="@android:color/white"
         android:inputType="textPersonName"
         android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/etBreed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvGender"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPetDetails" />
 
     <TextView
         android:id="@+id/tvDOB"
@@ -114,28 +132,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="58dp"
         android:layout_marginLeft="58dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginRight="53dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         android:text="D.O.B:"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/etDOB"
         app:layout_constraintEnd_toStartOf="@+id/etDOB"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/etDOB"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="51dp"
-        android:layout_marginRight="51dp"
-        android:background="@android:color/white"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvDOB"
-        app:layout_constraintTop_toBottomOf="@+id/etGender" />
 
     <TextView
         android:id="@+id/tvBreed"
@@ -156,12 +160,13 @@
         android:id="@+id/etBreed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="51dp"
-        android:layout_marginRight="51dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="38dp"
         android:background="@android:color/white"
         android:inputType="number|numberDecimal"
         android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/etWeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvBreed"
         app:layout_constraintTop_toBottomOf="@+id/etDOB" />
@@ -185,71 +190,69 @@
         android:id="@+id/etWeight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
         android:layout_marginEnd="51dp"
         android:layout_marginRight="51dp"
+        android:layout_marginBottom="36dp"
         android:background="@android:color/white"
         android:inputType="numberDecimal"
         android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnViewMedRec"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvWeight"
-        app:layout_constraintTop_toBottomOf="@+id/etBreed" />
+        app:layout_constraintStart_toEndOf="@+id/tvWeight" />
 
     <TextView
         android:id="@+id/tvViewMedRec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="58dp"
-        android:layout_marginLeft="58dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="34dp"
+        android:layout_marginBottom="11dp"
         android:text="Medical Records:"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etWeight" />
+        app:layout_constraintBottom_toTopOf="@+id/btnUpdate"
+        app:layout_constraintEnd_toStartOf="@+id/btnViewMedRec" />
 
     <Button
         android:id="@+id/btnViewMedRec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginLeft="34dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
         android:background="#f05924"
         android:text="View"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/tvViewMedRec"
-        app:layout_constraintStart_toEndOf="@+id/tvViewMedRec"
+        app:layout_constraintEnd_toEndOf="@+id/btnDelete"
         app:layout_constraintTop_toTopOf="@+id/tvViewMedRec" />
 
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginRight="72dp"
-        android:layout_marginBottom="91dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="33dp"
         android:background="#4CAF50"
         android:text="Update"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDelete"
-        app:layout_constraintStart_toStartOf="@+id/ivViewPet"
-        app:layout_constraintTop_toTopOf="@+id/tvViewMedRec" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="75dp"
-        android:layout_marginRight="75dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
         android:background="#4CAF50"
         android:text="Delete"
         android:textColor="@android:color/white"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnUpdate"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/btnViewMedRec" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

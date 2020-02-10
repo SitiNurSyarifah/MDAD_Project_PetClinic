@@ -26,11 +26,9 @@ public class ViewBillsActivity extends AppCompatActivity {
     TextView tvPetName;
     TextView tvBillNumber;
     TextView tvBillStatus;
-    TextView tvDescription;
-    TextView tvDateOfBill;
     TextView tvChargeAmt;
-    TextView tvTotalChargeAmt;
-  
+    TextView tvTotalAmt;
+
 
     Button btnOk;
     // Response
@@ -52,21 +50,15 @@ public class ViewBillsActivity extends AppCompatActivity {
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_BILLNUMBER = "bill_number";
     private static final String TAG_BILLSTATUS = "bill_status";
-    private static final String TAG_DESCRIPTION = "description";
-    private static final String TAG_DATEOFBILL = "date_of_bill";
-    private static final String TAG_CHARGEPRICE = "charge_price";
+    private static final String TAG_CHARGEAMOUNT = "charge_amount";
+    private static final String TAG_TOTALAMOUNT = "total_amount";
 
 
     private static String billPetName = "";
     private static String billBillNumber = "";
     private static String billBillStatus = "";
-    private static String billDescription = "";
-    private static String billDateOfBill = "";
-    private static String billChargePrice = "";
-    private static float billTotalAmt;
-    private static String billGST = "3.27";
-    private static String billConsultation = "15";
-
+    private static String billChargeAmount = "";
+    private static String billTotalAmt = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +102,10 @@ public class ViewBillsActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-
                 switch (option) {
                     case 1:
                         checkResponseViewBill(response);
                         break;
-
                 }
 
             }
@@ -143,27 +133,23 @@ public class ViewBillsActivity extends AppCompatActivity {
                 billPetName = billHist.getString(TAG_PETNAME);
                 billBillNumber = billHist.getString(TAG_BILLNUMBER);
                 billBillStatus = billHist.getString(TAG_BILLSTATUS);
-                billDescription = billHist.getString(TAG_DESCRIPTION);
-                billDateOfBill = billHist.getString(TAG_DATEOFBILL);
-                billChargePrice = billHist.getString(TAG_CHARGEPRICE);
-
-                billTotalAmt = Float.parseFloat(billChargePrice) + Float.parseFloat(billConsultation) + Float.parseFloat(billGST);
-                String formatBillTotalAmt = String.format("%.2f", billTotalAmt);
+                billChargeAmount = "$" + billHist.getString(TAG_CHARGEAMOUNT);
+                billTotalAmt = "$" + billHist.getString(TAG_TOTALAMOUNT);
 
 
                 tvPetName = (TextView) findViewById(R.id.tvPetName);
                 tvBillNumber = (TextView) findViewById(R.id.tvBillNumber);
                 tvBillStatus = (TextView) findViewById(R.id.tvBillStatus);
                 tvChargeAmt = (TextView) findViewById(R.id.tvChargeAmt);
-                tvTotalChargeAmt = (TextView) findViewById(R.id.tvTotalChargeAmt);
+                tvTotalAmt = (TextView) findViewById(R.id.tvTotalAmt);
 
 
                 // display bill data in EditText
                 tvPetName.setText(billPetName);
                 tvBillNumber.setText(billBillNumber);
                 tvBillStatus.setText(billBillStatus);
-                tvChargeAmt.setText(billChargePrice);
-                tvTotalChargeAmt.setText(formatBillTotalAmt);
+                tvChargeAmt.setText(billChargeAmount);
+                tvTotalAmt.setText(billTotalAmt);
 
 
             } else {

@@ -20,7 +20,9 @@
             android:layout_marginBottom="36dp"
             android:autoText="false"
             android:text="Medical Record"
+            android:textColor="@color/colorPrimary"
             android:textSize="18sp"
+            app:fontFamily="@font/courgette"
             app:layout_constraintBottom_toTopOf="@android:id/list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

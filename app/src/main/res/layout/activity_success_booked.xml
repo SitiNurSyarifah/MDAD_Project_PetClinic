@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SuccessBookedActivity">
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="225dp"
+        android:text="Back to Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAlert" />
+
+    <TextView
+        android:id="@+id/booking_date"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="119dp"
+        android:layout_marginRight="119dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtDateInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtDateInfo" />
+
+    <TextView
+        android:id="@+id/time_slots"
+        android:layout_width="0dp"
+        android:layout_height="17dp"
+        android:layout_marginEnd="119dp"
+        android:layout_marginRight="119dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtTimeInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtTimeInfo" />
+
+    <TextView
+        android:id="@+id/txtDateInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="78dp"
+        android:layout_marginLeft="78dp"
+        android:layout_marginTop="278dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="32dp"
+        android:text="Selected Date:"
+        app:layout_constraintBottom_toTopOf="@+id/txtTimeInfo"
+        app:layout_constraintEnd_toStartOf="@+id/booking_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTimeInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="78dp"
+        android:layout_marginLeft="78dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="77dp"
+        android:text="Selected Time:"
+        app:layout_constraintBottom_toTopOf="@+id/txtAlert"
+        app:layout_constraintEnd_toStartOf="@+id/time_slots"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDateInfo" />
+
+    <TextView
+        android:id="@+id/txtAlert"
+        android:layout_width="388dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="19dp"
+        android:text="Notification reminder will be alert within 3 days before appointment date."
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTimeInfo" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,6 +30,10 @@ public class LoginActivity extends AppCompatActivity {
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
+    private static final String TAG_USERNAME = "username";
+
+    String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +44,32 @@ public class LoginActivity extends AppCompatActivity {
         mUserName = (EditText) findViewById(R.id.username);
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
 
+        Intent i = getIntent();
+        // getting product id (pid) from intent
+        username = i.getStringExtra(TAG_USERNAME);
+
+
         // view products click event
         btnSignIn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                String pw = mPassword.getText().toString();
-                String uName = mUserName.getText().toString();
+                final String pw = mPassword.getText().toString();
+                username = mUserName.getText().toString();
+
 
                 if (pw.isEmpty()) {
                     mPassword.setError(getString(R.string.error_field_required));
 
-                } else if (uName.isEmpty()) {
+                } else if (username.isEmpty()) {
                     mUserName.setError(getString(R.string.error_field_required));
 
                 } else {
+
                     JSONObject dataJson = new JSONObject();
                     try {
-                        dataJson.put("username", uName);
+                        dataJson.put("username", username);
                         dataJson.put("password", pw);
 
 
@@ -112,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 finish();
                 Intent i = new Intent(this, MainActivity.class);
+                i.putExtra(TAG_USERNAME,username);
                 startActivity(i);
 
 

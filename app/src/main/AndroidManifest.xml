@@ -27,7 +27,6 @@
         <activity android:name=".ViewBillsActivity" />
         <activity android:name=".MedicalListActivity" />
         <activity android:name=".ConfirmBookingActivity" />
-        <activity android:name=".BookAppointmentActivity" />
         <activity android:name=".BillsHistoryActivity"/>
         <activity android:name=".SuccessBookedActivity"/>
     </application>

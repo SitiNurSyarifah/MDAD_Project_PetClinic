@@ -30,7 +30,7 @@ public class ConfirmBookingActivity extends AppCompatActivity {
     Button slot5;
     Button slot6;
     Button slot7;
-
+    Button btnchangedate;
     boolean check = false;
 
     String responseServer;

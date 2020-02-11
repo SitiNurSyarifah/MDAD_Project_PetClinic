@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton imgBtnViewPet;
     ImageButton imgBtnAddPet;
-    ImageButton imgBtnMedicalRecords;
+    //ImageButton imgBtnMedicalRecords;
     ImageButton imgBtnBookAppt;
     ImageButton imgBtnViewBills;
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // Buttons
         imgBtnViewPet = (ImageButton) findViewById(R.id.imgBtnViewPet);
         imgBtnAddPet = (ImageButton) findViewById(R.id.imgBtnAddPet);
-        imgBtnMedicalRecords = (ImageButton) findViewById(R.id.imgBtnMedicalRecords);
+       // imgBtnMedicalRecords = (ImageButton) findViewById(R.id.imgBtnMedicalRecords);
         imgBtnBookAppt = (ImageButton) findViewById(R.id.imgBtnBookAppt);
         imgBtnViewBills = (ImageButton) findViewById(R.id.imgBtnBills);
 
@@ -88,15 +88,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // view medical records click event
-        imgBtnMedicalRecords.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Launching medical records Activity
-                Intent i = new Intent(getApplicationContext(), MedicalListActivity.class);
-                startActivity(i);
-            }
-        });
+//        imgBtnMedicalRecords.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                // Launching medical records Activity
+//                Intent i = new Intent(getApplicationContext(), MedicalListActivity.class);
+//                startActivity(i);
+//            }
+//        });
 
         // book appt click event
         imgBtnBookAppt.setOnClickListener(new View.OnClickListener() {

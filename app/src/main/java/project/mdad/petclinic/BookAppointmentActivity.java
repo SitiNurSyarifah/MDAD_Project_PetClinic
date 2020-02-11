@@ -43,13 +43,16 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
     // Progress Dialog
     private ProgressDialog pDialog;
     private static final String url_booking = MainActivity.ipBaseAddress + "/confirm_booking.php";
-    private static final String url_update_booking = MainActivity.ipBaseAddress+"/update_booking.php";
-   // private static final String TAG_BOOKING = "booking";
+    private static final String url_update_booking = MainActivity.ipBaseAddress + "/update_booking.php";
+    // private static final String TAG_BOOKING = "booking";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PID = "pid";
+
     private static final String TAG_BOOKING_DATE = "booking_date";
     private static final String TAG_TIME_SLOTS = "time_slots";
+    private static final String TAG_USERNAME = "username";
 
+    String username;
     String date;
     String time_slots;
 
@@ -95,6 +98,8 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
         Intent i = getIntent();
         pid = i.getStringExtra(TAG_PID);
+        username = i.getStringExtra(TAG_USERNAME);
+        Toast.makeText(this, "Record " + username, Toast.LENGTH_SHORT).show();
         JSONObject dataJson = new JSONObject();
         try {
             dataJson.put("pid", pid);
@@ -111,7 +116,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                 booking_date.setText(date);
                 //calendarView.setMinDate(Long.parseLong(date));
             }
-             //calendarView.getDatePicker().setMinDate(System.current() - 1000); //disable previous dates
+            //calendarView.getDatePicker().setMinDate(System.current() - 1000); //disable previous dates
 
         });
 
@@ -128,6 +133,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
                 JSONObject dataJson = new JSONObject();
                 try {
+                    dataJson.put("username", username);
                     dataJson.put(TAG_BOOKING_DATE, date); //booking_date
                     dataJson.put(TAG_TIME_SLOTS, time_slots);
                 } catch (JSONException e) {
@@ -139,30 +145,31 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
             }
         });
 
-    //btnchangedate.setOnClickListener(new View.OnClickListener() {
-      //  @Override
+        //btnchangedate.setOnClickListener(new View.OnClickListener() {
+        //  @Override
         //public void onClick(View arg0) {
-          //  pDialog = new ProgressDialog(BookAppointmentActivity.this);
-            //pDialog.setIndeterminate(false);
-            //pDialog.setCancelable(true);
-            //pDialog.show();
+        //  pDialog = new ProgressDialog(BookAppointmentActivity.this);
+        //pDialog.setIndeterminate(false);
+        //pDialog.setCancelable(true);
+        //pDialog.show();
 
-            // deleting product in background thread
+        // deleting product in background thread
 
-            //JSONObject dataJson = new JSONObject();
-            //try{
-              //  dataJson.put("pid", pid);
-            //}catch(JSONException e){
+        //JSONObject dataJson = new JSONObject();
+        //try{
+        //  dataJson.put("pid", pid);
+        //}catch(JSONException e){
 
-            //}
-            //postData(url_update_booking,dataJson,2);
+        //}
+        //postData(url_update_booking,dataJson,2);
 
 
         //}
-    //});
+        //});
 
-}
-    public void postData(String url, final JSONObject json, final int option){
+    }
+
+    public void postData(String url, final JSONObject json, final int option) {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
@@ -170,9 +177,10 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
             public void onResponse(JSONObject response) {
 
 
-                switch (option){
-                    case 1:checkResponseCreate_Product(response);
-                   // case 2:checkResponseEditProduct(response);
+                switch (option) {
+                    case 1:
+                        checkResponseCreate_Product(response);
+                        // case 2:checkResponseEditProduct(response);
                         break;
                 }
             }
@@ -189,11 +197,11 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         });
         requestQueue.add(json_obj_req);
     }
-    public void checkResponseCreate_Product(JSONObject response)
-    {
-        Log.i("----Response", response+" ");
+
+    public void checkResponseCreate_Product(JSONObject response) {
+        Log.i("----Response", response + " ");
         try {
-            if(response.getInt(TAG_SUCCESS)==1){
+            if (response.getInt(TAG_SUCCESS) == 1) {
                 //finish();
                 //Intent i = new Intent(getApplicationContext(), SuccessBookedActivity.class);
                 //startActivity(i);
@@ -201,7 +209,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                 // dismiss the dialog once product uupdated
 //                pDialog.dismiss();
 
-            }else{
+            } else {
                 // product with pid not found
             }
 
@@ -214,36 +222,34 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
     //public void checkResponseEditProduct(JSONObject response)
     //{
-      //  try {
-        //    if(response.getInt("success")==1){
-                // successfully received product details
-          //      JSONArray productObj = response.getJSONArray(TAG_BOOKING); // JSON Array
-                // get first product object from JSON Array
-            //    JSONObject product = productObj.getJSONObject(0);
-              //  date=product.getString(TAG_BOOKING_DATE);
-                //time_slots=product.getString(TAG_TIME_SLOTS);
+    //  try {
+    //    if(response.getInt("success")==1){
+    // successfully received product details
+    //      JSONArray productObj = response.getJSONArray(TAG_BOOKING); // JSON Array
+    // get first product object from JSON Array
+    //    JSONObject product = productObj.getJSONObject(0);
+    //  date=product.getString(TAG_BOOKING_DATE);
+    //time_slots=product.getString(TAG_TIME_SLOTS);
 
 
 //                Log.i("---Prod details",prodName+"  "+prodPrice+"  "+prodDesc);
-                //booking_date = (TextView) findViewById(R.id.booking_date);
-                //final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+    //booking_date = (TextView) findViewById(R.id.booking_date);
+    //final Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
 
-                // display product data in EditText
-                //booking_date.setText(date);
-                //spinner.getSelectedItem();
-
-
+    // display product data in EditText
+    //booking_date.setText(date);
+    //spinner.getSelectedItem();
 
 
 //            }else{
-                // product with pid not found
-  //          }
+    // product with pid not found
+    //          }
 
     //    } catch (JSONException e) {
-      //      e.printStackTrace();
+    //      e.printStackTrace();
 
-        //}
+    //}
 
 
     //}

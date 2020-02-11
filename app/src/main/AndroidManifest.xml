@@ -17,9 +17,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
 
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ViewPetListActivity" />
@@ -27,7 +25,6 @@
         <activity android:name=".AddPetActivity" />
         <activity android:name=".ViewBillsActivity" />
         <activity android:name=".MedicalListActivity" />
-        <activity android:name=".ConfirmBookingActivity" />
         <activity android:name=".BillsHistoryActivity" />
         <activity android:name=".SuccessBookedActivity" />
         <activity android:name=".BookAppointmentActivity"/>

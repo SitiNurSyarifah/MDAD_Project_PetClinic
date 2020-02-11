@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_PID = "pid";
     private static final String TAG_USERNAME = "username";
 
-    String pid,username;
+    String pid, username;
 
 
     ImageButton imgBtnViewPet;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // Buttons
         imgBtnViewPet = (ImageButton) findViewById(R.id.imgBtnViewPet);
         imgBtnAddPet = (ImageButton) findViewById(R.id.imgBtnAddPet);
-       // imgBtnMedicalRecords = (ImageButton) findViewById(R.id.imgBtnMedicalRecords);
+        // imgBtnMedicalRecords = (ImageButton) findViewById(R.id.imgBtnMedicalRecords);
         imgBtnBookAppt = (ImageButton) findViewById(R.id.imgBtnBookAppt);
         imgBtnViewBills = (ImageButton) findViewById(R.id.imgBtnBills);
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Launching view pet list Activity
                 Intent i = new Intent(getApplicationContext(), ViewPetListActivity.class);
-                i.putExtra(TAG_USERNAME,username);
+                i.putExtra(TAG_USERNAME, username);
                 startActivity(i);
             }
         });
@@ -83,28 +83,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Launching All add pet Activity
                 Intent i = new Intent(getApplicationContext(), AddPetActivity.class);
+                i.putExtra(TAG_USERNAME, username);
                 startActivity(i);
             }
         });
 
-        // view medical records click event
-//        imgBtnMedicalRecords.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                // Launching medical records Activity
-//                Intent i = new Intent(getApplicationContext(), MedicalListActivity.class);
-//                startActivity(i);
-//            }
-//        });
 
         // book appt click event
         imgBtnBookAppt.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 // Launching book appt Activity
                 Intent i = new Intent(getApplicationContext(), BookAppointmentActivity.class);
+                i.putExtra(TAG_USERNAME, username);
                 startActivity(i);
             }
         });
@@ -114,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                 //Launching view bills Activity
+                //Launching view bills Activity
                 Intent i = new Intent(getApplicationContext(), BillsHistoryActivity.class);
-                i.putExtra(TAG_USERNAME,username);
+                i.putExtra(TAG_USERNAME, username);
 
                 startActivity(i);
             }

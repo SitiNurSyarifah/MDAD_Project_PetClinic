@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,9 +45,13 @@ public class AddPetActivity extends AppCompatActivity {
     private static final String TAG_PID = "pid";
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_GENDER = "gender";
-    private static final String TAG_DOB = "dob";
+    private static final String TAG_DOB = "date_of_birth";
     private static final String TAG_BREED = "breed";
     private static final String TAG_WEIGHT = "weight";
+
+    private static final String TAG_USERNAME = "username";
+
+    String username;
 
 
     @Override
@@ -66,6 +71,10 @@ public class AddPetActivity extends AppCompatActivity {
         // Create button
         Button btnAddPet = (Button) findViewById(R.id.btnAddPet);
 
+        Intent i = getIntent();
+        // getting product id (pid) from intent
+        username = i.getStringExtra(TAG_USERNAME);
+        Toast.makeText(this, "Record " + username, Toast.LENGTH_SHORT).show();
 
         // button click event
         btnAddPet.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +92,7 @@ public class AddPetActivity extends AppCompatActivity {
 
                 JSONObject dataJson = new JSONObject();
                 try {
+                    dataJson.put("username", username);
                     dataJson.put(TAG_PETNAME, petName);
                     dataJson.put(TAG_GENDER, gender);
                     dataJson.put(TAG_DOB, dob);

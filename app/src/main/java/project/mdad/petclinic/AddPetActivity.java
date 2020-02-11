@@ -149,6 +149,7 @@ public class AddPetActivity extends AppCompatActivity {
 
                 finish();
                 Intent i = new Intent(this, ViewPetListActivity.class);
+                i.putExtra(TAG_USERNAME, username);
                 startActivity(i);
 
             } else {

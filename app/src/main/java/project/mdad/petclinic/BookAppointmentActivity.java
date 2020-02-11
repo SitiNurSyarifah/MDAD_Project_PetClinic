@@ -127,6 +127,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                 date = booking_date.getText().toString();
                 time_slots = spinner.getSelectedItem().toString();
                 Intent intent = new Intent(getApplicationContext(), SuccessBookedActivity.class);
+                intent.putExtra(TAG_USERNAME, username);
                 intent.putExtra("data", String.valueOf(spinner.getSelectedItem()));
                 intent.putExtra("date", String.valueOf(booking_date.getText()));
                 startActivity(intent);

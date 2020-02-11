@@ -75,7 +75,6 @@ public class ViewBillsActivity extends AppCompatActivity {
         JSONObject dataJson = new JSONObject();
         try {
             dataJson.put("pid", pid);
-            //     dataJson.put("password", "def");
 
         } catch (JSONException e) {
 

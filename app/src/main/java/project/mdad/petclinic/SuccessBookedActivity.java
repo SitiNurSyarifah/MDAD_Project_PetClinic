@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,8 @@ public class SuccessBookedActivity extends AppCompatActivity {
     private static final String TAG_TIME = "time";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_HOME = "home";
+    private static final String TAG_USERNAME = "username";
+    String username;
     String date;
     String time;
 
@@ -27,6 +30,8 @@ public class SuccessBookedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_success_booked);
         Log.i("url_display", url_display);
         Intent i = getIntent();
+        username = i.getStringExtra(TAG_USERNAME);
+        Toast.makeText(this, "Record " + username, Toast.LENGTH_SHORT).show();
 
         txtDate = (TextView) findViewById(R.id.booking_date);
         txtTime = (TextView) findViewById(R.id.time_slots);
@@ -41,6 +46,7 @@ public class SuccessBookedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra(TAG_USERNAME, username);
                 startActivity(intent);
             }
 

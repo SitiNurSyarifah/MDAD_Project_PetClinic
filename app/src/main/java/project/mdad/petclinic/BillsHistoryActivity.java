@@ -59,7 +59,7 @@ public class BillsHistoryActivity extends ListActivity {
         // Getting complete bill details in background thread
         JSONObject dataJson = new JSONObject();
         try {
-            dataJson.put("username",username);
+            dataJson.put("username", username);
             //     dataJson.put("password", "def");
 
         } catch (JSONException e) {
@@ -160,7 +160,7 @@ public class BillsHistoryActivity extends ListActivity {
                     String petName = c.getString(TAG_PETNAME);
                     String description = c.getString(TAG_DESCRIPTION);
                     String dateOfBill = c.getString(TAG_DATEOFBILL);
-                    String totalAmount= c.getString(TAG_TOTALAMOUNT);
+                    String totalAmount = c.getString(TAG_TOTALAMOUNT);
 
 
                     // creating new HashMap
@@ -171,7 +171,7 @@ public class BillsHistoryActivity extends ListActivity {
                     map.put(TAG_PETNAME, petName);
                     map.put(TAG_DESCRIPTION, description);
                     map.put(TAG_DATEOFBILL, dateOfBill);
-                    map.put(TAG_TOTALAMOUNT,"$"+totalAmount);
+                    map.put(TAG_TOTALAMOUNT, "$" + totalAmount);
 
                     // adding HashList to ArrayList
                     billHistoryList.add(map);

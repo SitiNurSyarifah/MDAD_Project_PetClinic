@@ -55,6 +55,7 @@
         android:color="@color/colorPrimary"
         android:shape="oval"
         app:layout_constraintBottom_toTopOf="@+id/btnchangedate"
+        android:minDate="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

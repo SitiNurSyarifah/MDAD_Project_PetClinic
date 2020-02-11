@@ -16,11 +16,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="70dp"
-        android:src="@mipmap/ic_launcher_round"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/catdp" />
+        app:srcCompat="@drawable/catdp"
+        tools:srcCompat="@drawable/catdp" />
 
     <TextView
         android:id="@+id/tvViewPetList"

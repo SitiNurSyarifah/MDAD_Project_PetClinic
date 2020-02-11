@@ -8,16 +8,16 @@
 
     <ImageView
         android:id="@+id/imageDP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="123dp"
+        android:layout_height="122dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="36dp"
         android:layout_marginBottom="227dp"
         app:layout_constraintBottom_toTopOf="@android:id/list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/catdp" />
 
     <TextView
         android:id="@+id/txtHistory"

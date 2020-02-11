@@ -62,9 +62,11 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         // save button
 
         calendarView = (CalendarView) findViewById(R.id.calendarView);
+        calendarView.setMinDate(calendarView.getDate());
         booking_date = (TextView) findViewById(R.id.booking_date);
-        //calendarView.setSelected(Color.parseColor("#00BCD4"));
-       // btnchangedate = (Button) findViewById(R.id.btnchangedate);
+        //CalendarView min = CalendarView();
+        //calendarView.setMinDate(min);
+        //btnchangedate = (Button) findViewById(R.id.btnchangedate);
         final Spinner spinner = (Spinner) findViewById(R.id.spinner);
         btnConfirm = (Button) findViewById(R.id.btnConfirm);
         spinner.setOnItemSelectedListener(this);
@@ -102,14 +104,18 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
         }
 
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String date = dayOfMonth + "/" + (month + 1) + "/" + year;
                 booking_date.setText(date);
+                //calendarView.setMinDate(Long.parseLong(date));
             }
+             //calendarView.getDatePicker().setMinDate(System.current() - 1000); //disable previous dates
+
         });
+
+
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

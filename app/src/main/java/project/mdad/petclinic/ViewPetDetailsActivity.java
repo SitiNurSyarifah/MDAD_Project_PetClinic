@@ -53,7 +53,7 @@ public class ViewPetDetailsActivity extends AppCompatActivity {
     private static final String TAG_PID = "pid";
     private static final String TAG_PETNAME = "petName";
     private static final String TAG_GENDER = "gender";
-    private static final String TAG_DOB = "dob";
+    private static final String TAG_DOB = "date_of_birth";
     private static final String TAG_BREED = "breed";
     private static final String TAG_WEIGHT = "weight";
 
